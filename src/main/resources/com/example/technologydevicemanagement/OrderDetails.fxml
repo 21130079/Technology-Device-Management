@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.OrderDetails">
+   <children>
+      <Label layoutX="242.0" layoutY="33.0" text="Order Details">
+         <font>
+            <Font name="Droid Sans Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView layoutY="73.0" prefHeight="229.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="377.00000607967377" text="Name product" />
+          <TableColumn prefWidth="81.39996337890625" text="Quantity" />
+            <TableColumn minWidth="0.0" prefWidth="141.39999389648438" text="Price" />
+        </columns>
+      </TableView>
+      <Label layoutX="442.0" layoutY="337.0" text="Time">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="441.0" layoutY="310.0" text="Total">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
