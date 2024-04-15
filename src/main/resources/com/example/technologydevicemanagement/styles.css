@@ -1,0 +1,5 @@
+#topPane{
+    -fx-alignment: right;
+    -fx-background-color: gray;
+    -fx-hgap: 20;
+}
