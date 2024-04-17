@@ -4,8 +4,8 @@ package Model;
 import java.util.Date;
 
 public class Device {
-    private String idProduct;
-    private String nameProduct;
+    private String idDevice;
+    private String nameDevice;
     private String category; // phone, laptop ,tablet,...
     private double price;
     private String brand;
@@ -15,8 +15,8 @@ public class Device {
     private int quantityInStock;
 
         public Device(String idProduct, String nameProduct, String category, double price, String brand, Date manufacturingDate, double weight, String urlImg, int quantityInStock) {
-            this.idProduct = idProduct;
-            this.nameProduct = nameProduct;
+            this.idDevice = idProduct;
+            this.nameDevice = nameProduct;
             this.category = category;
             this.price = price;
             this.brand = brand;
@@ -29,8 +29,8 @@ public class Device {
     @Override
     public String toString() {
         return "Device{" +
-                "idProduct='" + idProduct + '\'' +
-                ", nameProduct='" + nameProduct + '\'' +
+                "idProduct='" + idDevice + '\'' +
+                ", nameProduct='" + nameDevice + '\'' +
                 ", category='" + category + '\'' +
                 ", price=" + price +
                 ", brand='" + brand + '\'' +
@@ -41,20 +41,20 @@ public class Device {
                 '}';
     }
 
-    public String getIdProduct() {
-        return idProduct;
+    public String getIdDevice() {
+        return idDevice;
     }
 
-    public void setIdProduct(String idProduct) {
-        this.idProduct = idProduct;
+    public void setIdDevice(String idDevice) {
+        this.idDevice = idDevice;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
+    public String getNameDevice() {
+        return nameDevice;
     }
 
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
+    public void setNameDevice(String nameDevice) {
+        this.nameDevice = nameDevice;
     }
 
     public String getCategory() {

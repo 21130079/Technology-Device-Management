@@ -57,8 +57,8 @@ public class Order {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Device, Integer> entry : listDevice.entrySet()) {
             Device device = entry.getKey();
-            sb.append("ID: ").append(device.getIdProduct()).append(", ")
-                    .append("Name: ").append(device.getNameProduct()).append(", ")
+            sb.append("ID: ").append(device.getIdDevice()).append(", ")
+                    .append("Name: ").append(device.getNameDevice()).append(", ")
                     .append("Category: ").append(device.getCategory()).append(", ")
                     .append("Price: ").append(device.getPrice()).append(", ")
                     .append("Brand: ").append(device.getBrand()).append(", ")
