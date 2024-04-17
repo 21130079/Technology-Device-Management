@@ -80,7 +80,7 @@ public class SaleManagement extends Application {
 
             // Center
 
-            tableView.setPrefWidth(980);
+            tableView.setPrefWidth(1198);
             tableView.setPrefHeight(618);
             orderIdColumn = new TableColumn<>("Mã đơn hàng");
             productListColumn = new TableColumn<>("Danh sách sản phẩm");
@@ -90,11 +90,11 @@ public class SaleManagement extends Application {
             TableColumn<Order, Order> actionColumn = new TableColumn<>("Xem thêm");
 
 
-                orderIdColumn.setPrefWidth(100);
-                productListColumn.setPrefWidth(468);
-                paymentDateColumn.setPrefWidth(170);
-                totalAmountColumn.setPrefWidth(140);
-                actionColumn.setPrefWidth(100);
+                orderIdColumn.setPrefWidth(130);
+                productListColumn.setPrefWidth(555);
+                paymentDateColumn.setPrefWidth(200);
+                totalAmountColumn.setPrefWidth(180);
+                actionColumn.setPrefWidth(130);
                 // can giua cac o
             orderIdColumn.setStyle("-fx-alignment: CENTER;");
             productListColumn.setStyle("-fx-alignment: CENTER;");
@@ -126,11 +126,11 @@ public class SaleManagement extends Application {
             getdata();
 
             ScrollPane centerScrollPane = new ScrollPane(tableView);
-            centerScrollPane.setPrefWidth(995);
-            centerScrollPane.setPrefHeight(486);
+            centerScrollPane.setPrefWidth(1200);
+            centerScrollPane.setPrefHeight(500);
             root.setCenter(centerScrollPane);
 
-            Scene scene = new Scene(root, 995, 680);
+            Scene scene = new Scene(root, 1200, 700);
             // Load CSS file
 
             primaryStage.setScene(scene);
