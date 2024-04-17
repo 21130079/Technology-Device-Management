@@ -1,6 +1,9 @@
 package Model;
 
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.Date;
 
 public class Device {
@@ -112,6 +115,19 @@ public class Device {
     public void setQuantityInStock(int quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
+    public StringProperty idDeviceProperty() {
+        return new SimpleStringProperty(idProduct);
+    }
+    public StringProperty nameDeviceProperty() {
+        return new SimpleStringProperty(nameProduct);
+    }
+    public StringProperty quantityDeviceProperty() {
+        return new SimpleStringProperty(String.valueOf(quantityInStock));
+    }
+    public StringProperty priceDeviceProperty() {
+        return new SimpleStringProperty(String.valueOf(price));
+    }
+
 }
 
 

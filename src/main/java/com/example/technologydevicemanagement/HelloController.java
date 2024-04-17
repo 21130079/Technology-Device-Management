@@ -18,7 +18,7 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
     @FXML
-    public static TableView historyOrders_table;
+    public TableView historyOrders_table;
 
     public void initialize() {
 
