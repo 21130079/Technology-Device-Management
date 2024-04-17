@@ -1,5 +1,5 @@
 //package Database;
-//import java.sql.*;
+//import java.sql.Connection;
 //public class fileUtils {
 //    public static Connection connectDb() {
 //        String url = "jdbc:sqlserver://localhost:1433;database=MusicWeb;user=MusicWeb;password=MusicWeb;encrypt=true;trustServerCertificate=true;";
