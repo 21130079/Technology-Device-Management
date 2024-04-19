@@ -1,7 +1,7 @@
-package Database;
+package database;
 
-import Model.Device;
-import Model.Order;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.util.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class DaoOrderDevices {
     public int insert(Device device, String idOrder){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("insert into OrderDevices(idDevice,idOrder) values (?,?)");
             stm.setString(1,device.getIdDevice());
@@ -33,7 +33,7 @@ public class DaoOrderDevices {
         return count;
     }
     public LinkedHashMap<String,Integer> getListIdDevice(String idOrder){
-            Connection connection = fileUtils.getConnection();
+            Connection connection = DBUtil.getConnection();
         LinkedHashMap<String,Integer> devices = new LinkedHashMap<>();
             try {
                 PreparedStatement stm = connection.prepareStatement("select * from Orderdevices where idOrder=?");
@@ -55,7 +55,7 @@ public class DaoOrderDevices {
 
             return devices;
     }
-    public LinkedHashMap<Device,Integer> getListDevice(String idOrder){
+    public LinkedHashMap<Device, Integer> getListDevice(String idOrder){
         DaoDevice daoDevice = new DaoDevice();
         LinkedHashMap<Device,Integer> result = new  LinkedHashMap<Device,Integer>();
         for (Map.Entry<String, Integer> entry : getListIdDevice(idOrder).entrySet()) {

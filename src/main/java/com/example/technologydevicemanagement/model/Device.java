@@ -1,4 +1,4 @@
-package Model;
+package com.example.technologydevicemanagement.model;
 
 
 import javafx.beans.property.*;

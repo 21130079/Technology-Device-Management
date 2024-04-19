@@ -1,7 +1,6 @@
-package Model;
+package com.example.technologydevicemanagement.model;
 
-import Database.DaoDevice;
-import com.example.technologydevicemanagement.CreateOrderController;
+import database.DaoDevice;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;

@@ -1,13 +1,11 @@
-package com.example.technologydevicemanagement;
+package com.example.technologydevicemanagement.controller;
 
-import Database.DaoDevice;
-import Database.DaoOrder;
-import Database.DaoOrderDevices;
-import Model.Device;
-import Model.Order;
-import Model.QuantityCell;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.model.QuantityCell;
+import database.DaoDevice;
+import database.DaoOrder;
+import database.DaoOrderDevices;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,12 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class CreateOrderController {
 

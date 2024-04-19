@@ -7,7 +7,7 @@
 
 <?import java.net.URL?>
 <?import java.lang.String?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.CreateOrderController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.controller.CreateOrderController">
 
    <children>
 
@@ -70,17 +70,17 @@
                         <Font size="30.0" />
                      </font></Text>
                   <TableView fx:id="billTable" maxWidth="-Infinity" prefHeight="387.0" prefWidth="1198.0">
-                    <columns>
-                      <TableColumn fx:id="idBillCol" prefWidth="100" text="ID Device" />
-                      <TableColumn fx:id="nameBillCol" prefWidth="170" text="Name Device" />
-                       <TableColumn fx:id="brandBillCol" prefWidth="130" text="Brand" />
-                       <TableColumn fx:id="imgBillCol" prefWidth="150" text="Image Device" />
-                       <TableColumn fx:id="cateBillCol" prefWidth="130" text="Category" />
-                       <TableColumn fx:id="weightBillCol" prefWidth="130" text="Weight" />
+                     <columns>
+                        <TableColumn fx:id="idBillCol" prefWidth="100" text="ID Device" />
+                        <TableColumn fx:id="nameBillCol" prefWidth="170" text="Name Device" />
+                        <TableColumn fx:id="brandBillCol" prefWidth="130" text="Brand" />
+                        <TableColumn fx:id="imgBillCol" prefWidth="150" text="Image Device" />
+                        <TableColumn fx:id="cateBillCol" prefWidth="130" text="Category" />
+                        <TableColumn fx:id="weightBillCol" prefWidth="130" text="Weight" />
                         <TableColumn fx:id="quantityBillCol" prefWidth="130" text="Quantity" />
                         <TableColumn fx:id="amountBillCol" prefWidth="130" text="Amount" />
                         <TableColumn fx:id="editBillCol" prefWidth="125" text="Edit" />
-                    </columns>
+                     </columns>
 
                   </TableView>
                   <VBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="1195.0">

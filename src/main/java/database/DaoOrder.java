@@ -1,7 +1,8 @@
-package Database;
+package database;
 
-import Model.Device;
-import Model.Order;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.model.Order;
+import com.example.technologydevicemanagement.util.DBUtil;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,10 +11,10 @@ import java.util.LinkedHashMap;
 
 public class DaoOrder {
     public String insert(){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("insert into Orders(idOrder,invoiceDate) values (?,?)");
-           String id =fileUtils.generateUniqueId();
+           String id = DBUtil.generateUniqueId();
             stm.setString(1, id);
             stm.setDate(2, Date.valueOf(LocalDate.now()));
             stm.executeUpdate();
@@ -24,7 +25,7 @@ public class DaoOrder {
 
     }
     public Order getById(String id ){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("select * from orders where idOrder = ?");
             stm.setString(1, id);
@@ -41,7 +42,7 @@ public class DaoOrder {
         return null;
     }
     public ArrayList<Order> getAll(){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         ArrayList<Order> orders = new ArrayList<>();
         try {
             PreparedStatement stm = connection.prepareStatement("select * from orders");
