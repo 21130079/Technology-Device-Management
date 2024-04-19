@@ -23,11 +23,7 @@ public class HelloController {
     public void initialize() {
 
 
-        // Điền dữ liệu vào TableView
-        ObservableList<Order> Orders = FXCollections.observableArrayList();
-        Orders.add(new Order("1",null,null,1));
-        historyOrders_table = new TableView();
-        historyOrders_table.setItems(Orders);
+
     }
 
 }

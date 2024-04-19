@@ -1,10 +1,11 @@
 package Model;
 
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Device {
     private String idDevice;
@@ -16,6 +17,8 @@ public class Device {
     private double weight;
     private String urlImg;
     private int quantityInStock;
+    private double amount ;
+    private int quantity;
 
         public Device(String idProduct, String nameProduct, String category, double price, String brand, Date manufacturingDate, double weight, String urlImg, int quantityInStock) {
             this.idDevice = idProduct;
@@ -27,6 +30,8 @@ public class Device {
             this.weight = weight;
             this.urlImg = urlImg;
             this.quantityInStock = quantityInStock;
+            this.amount=price;
+            this.quantity=1;
         }
 
     @Override
@@ -116,18 +121,71 @@ public class Device {
         this.quantityInStock = quantityInStock;
     }
     public StringProperty idDeviceProperty() {
-        return new SimpleStringProperty(idProduct);
+        return new SimpleStringProperty(idDevice);
     }
     public StringProperty nameDeviceProperty() {
-        return new SimpleStringProperty(nameProduct);
-    }
-    public StringProperty quantityDeviceProperty() {
-        return new SimpleStringProperty(String.valueOf(quantityInStock));
-    }
-    public StringProperty priceDeviceProperty() {
-        return new SimpleStringProperty(String.valueOf(price));
+        return new SimpleStringProperty(nameDevice);
     }
 
+    public StringProperty categoryProperty() {
+        return new SimpleStringProperty(category);
+    }
+
+    public DoubleProperty priceProperty() {
+        return new SimpleDoubleProperty(price);
+    }
+
+    public StringProperty brandProperty() {
+        return new SimpleStringProperty(brand);
+    }
+
+    public StringProperty manufacturingDateProperty() {
+        return new SimpleStringProperty(manufacturingDate+"");
+    }
+
+    public DoubleProperty weightProperty() {
+        return new SimpleDoubleProperty(weight);
+    }
+
+    public StringProperty urlImgProperty() {
+        return new SimpleStringProperty(urlImg);
+    }
+
+    public IntegerProperty quantityInStockProperty() {
+        return new SimpleIntegerProperty(quantityInStock);
+    }
+   public boolean isContainedBy(LinkedHashMap<Device,Integer> mapDevice){
+       for (Map.Entry<Device, Integer> entry : mapDevice.entrySet()) {
+           Device key = entry.getKey();
+           Integer value = entry.getValue();
+           if(key.toString().equals(this.toString()))
+               return true;
+       }
+       return false;
+   }
+    public DoubleProperty amountProperty() {
+        return new SimpleDoubleProperty(amount);
+    }
+
+
+    public double getAmount() {
+        return amount;
+    }
+
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+    public IntegerProperty quantityProperty() {
+        return new SimpleIntegerProperty(quantity);
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }
 
 
