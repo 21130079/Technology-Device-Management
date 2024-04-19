@@ -1,27 +1,22 @@
 package com.example.technologydevicemanagement;
 
-import Model.Device;
-import Model.Order;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.model.Order;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
-public class SaleManagement extends Application {
+public class SaleManagementApp extends Application {
     TableView tableView = new TableView();
     TableColumn<Order, String> orderIdColumn,productListColumn,paymentDateColumn,totalAmountColumn;
 
@@ -134,7 +129,7 @@ public class SaleManagement extends Application {
             // Load CSS file
 
             primaryStage.setScene(scene);
-             scene.getStylesheets().add("com/example/technologydevicemanagement/styles.css");
+             scene.getStylesheets().add("com/example/technologydevicemanagement/view/styles.css");
             primaryStage.setTitle("JavaFX Application");
             primaryStage.show();
         }

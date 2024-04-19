@@ -16,3 +16,5 @@ CREATE TABLE orders (
 	invoiceDate DATE NOT NULL,
 	amount Float NOT NULL
 );
+
+select * from devices

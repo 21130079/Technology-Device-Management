@@ -1,12 +1,12 @@
-package com.example.technologydevicemanagement;
+package com.example.technologydevicemanagement.controller;
 
-import Model.Device;
+import com.example.technologydevicemanagement.model.Device;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.util.Date;
 
 public class CreateOrderController {

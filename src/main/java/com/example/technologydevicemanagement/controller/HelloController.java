@@ -1,13 +1,11 @@
-package com.example.technologydevicemanagement;
+package com.example.technologydevicemanagement.controller;
 
-import Model.Order;
+import com.example.technologydevicemanagement.model.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class HelloController {
     @FXML
