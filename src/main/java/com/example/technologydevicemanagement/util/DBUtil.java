@@ -1,17 +1,39 @@
 package com.example.technologydevicemanagement.util;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.UUID;
+
 public class DBUtil {
-    public static Connection connectDb() {
+    private static Connection connection;
+    private static String url = "jdbc:mysql://localhost:3306/tdm";
+    private static String user = "root";
+    private static String password = "";
+
+    public static Connection getConnection(){
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/TechnologyDeviceManagement", "root", "");
-
-            return connection;
-        } catch (Exception e) {
-            e.printStackTrace();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
+        return connection;
+    }
 
-        return null;
+
+
+    public static String generateUniqueId() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
+
+
+
+
+    public static void main(String[] args) {
+        getConnection();
     }
 
 }

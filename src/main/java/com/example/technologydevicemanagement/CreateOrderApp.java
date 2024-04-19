@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class CreateOrderApp extends Application {
+    Scene scene;
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
@@ -17,4 +18,7 @@ public class CreateOrderApp extends Application {
     }
 
 
+    public Scene getScene() {
+        return scene;
+    }
 }
