@@ -5,7 +5,6 @@ import Database.DaoOrder;
 import Database.DaoOrderDevices;
 import Model.Device;
 import Model.Order;
-import Model.QuantityCell;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -196,7 +195,7 @@ public class CreateOrderController {
 
         return stocktable;
     }
-    // inner class
+    //inner class
     public class QuantityCell extends TableCell<Device, Integer> {
         private final TextField textField = new TextField();
         private final Button addButton = new Button("+");
@@ -280,10 +279,9 @@ public class CreateOrderController {
         }
         private void updateAmount(Integer newValue){
             double amount = newValue * ((Device) getTableRow().getItem()).getPrice();
-
+            System.out.println(amount);
             getTableRow().getItem().setAmount(amount);
             getTableView().refresh();
-            stocktable.refresh();
 
         }
     }
