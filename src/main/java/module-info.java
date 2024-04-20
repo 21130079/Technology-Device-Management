@@ -5,7 +5,7 @@ module com.example.technologydevicemanagement {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
-//    requires mysql.connector.j;
+
     requires java.sql;
 
     exports com.example.technologydevicemanagement.controller;

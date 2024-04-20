@@ -13,7 +13,7 @@ public class SaleManagementApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/sale-management.fxml"));
+        Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/sale-management.fxml"));
         Scene scene = new Scene(root, 1200, 700);
         primaryStage.setScene(scene);
         primaryStage.setTitle("JavaFX Application");

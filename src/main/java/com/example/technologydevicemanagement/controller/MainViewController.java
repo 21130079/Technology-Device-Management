@@ -79,8 +79,8 @@ public class MainViewController {
        historyOrderTable.setItems(orders);
    }
     public void showCreateOrderView(javafx.event.ActionEvent actionEvent) throws IOException {
-        System.out.println("Button clicked!");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateOrder.fxml"));
+      
+        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
