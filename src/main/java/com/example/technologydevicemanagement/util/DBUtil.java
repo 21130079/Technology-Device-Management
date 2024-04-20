@@ -1,14 +1,10 @@
-package Database;
-import java.io.FileInputStream;
-import java.io.IOException;
+package com.example.technologydevicemanagement.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
-import java.util.Random;
 import java.util.UUID;
 
-public class fileUtils {
+public class DBUtil {
     private static Connection connection;
     private static String url = "jdbc:mysql://localhost:3306/tdm";
     private static String user = "root";

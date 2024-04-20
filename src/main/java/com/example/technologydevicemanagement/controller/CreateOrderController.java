@@ -1,14 +1,16 @@
-package com.example.technologydevicemanagement;
+package com.example.technologydevicemanagement.controller;
 
-import Database.DaoDevice;
-import Database.DaoOrder;
-import Database.DaoOrderDevices;
-import Model.Device;
-import Model.Order;
+
+import com.example.technologydevicemanagement.SaleManagementApp;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.model.QuantityCell;
+import database.DaoDevice;
+import database.DaoOrder;
+import database.DaoOrderDevices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,13 +18,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class CreateOrderController {
 
@@ -174,9 +177,7 @@ public class CreateOrderController {
         Platform.runLater(() -> {
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("SaleManagement.fxml"));
-                Parent root = loader.load();
-
+                Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/sale-management.fxml"));
                 // Tạo một Scene mới
                 Scene scene = new Scene(root, 1200, 700);
                  Stage stage = new Stage();

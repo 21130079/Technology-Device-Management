@@ -1,6 +1,7 @@
-package Database;
+package database;
 
-import Model.Device;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.util.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.Date;
 
 public class DaoDevice {
     public ArrayList<Device> getAll(){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         ArrayList<Device> devices = new ArrayList<>();
         try {
             PreparedStatement stm = connection.prepareStatement("select * from devices");
@@ -42,7 +43,7 @@ public class DaoDevice {
 
     }
     public Device getById(String idDevice){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("select * from devices where idDevice = ?");
             stm.setString(1,idDevice);
@@ -68,7 +69,7 @@ public class DaoDevice {
         return null;
     }
     public int decreaseQuantity(Device device,int quantity){
-        Connection connection = fileUtils.getConnection();
+        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("update devices set quantityInStock = ? where idDevice =?");
             stm.setInt(1,quantity);

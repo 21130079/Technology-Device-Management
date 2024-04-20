@@ -1,7 +1,7 @@
-package com.example.technologydevicemanagement;
-import Database.DaoOrder;
-import Model.Device;
-import Model.Order;
+package com.example.technologydevicemanagement.controller;
+import com.example.technologydevicemanagement.CreateOrderApp;
+import com.example.technologydevicemanagement.model.Order;
+import database.DaoOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,13 +14,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.util.Date;
-import java.util.LinkedHashMap;
 
 public class MainViewController {
-    CreateOrder createOrder = new CreateOrder();
+    CreateOrderApp createOrder = new CreateOrderApp();
     @FXML
     TableView historyOrderTable;
     @FXML
@@ -82,8 +79,8 @@ public class MainViewController {
        historyOrderTable.setItems(orders);
    }
     public void showCreateOrderView(javafx.event.ActionEvent actionEvent) throws IOException {
-        System.out.println("Button clicked!");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateOrder.fxml"));
+      
+        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
