@@ -8,17 +8,17 @@ import Model.Order;
 import Model.QuantityCell;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -193,6 +193,98 @@ public class CreateOrderController {
     }
 
     public TableView<Device> getStocktable() {
+
         return stocktable;
+    }
+    // inner class
+    public class QuantityCell extends TableCell<Device, Integer> {
+        private final TextField textField = new TextField();
+        private final Button addButton = new Button("+");
+        private final Button minusButton = new Button("-");
+        public QuantityCell() {
+
+            textField.setPrefWidth(60);
+            textField.setStyle("-fx-alignment: center");
+            addButton.setPrefWidth(25);
+            minusButton.setPrefWidth(25);
+            addButton.setOnAction(event -> {
+                int newValue = Integer.parseInt(textField.getText()) + 1;
+                if(newValue<=getTableView().getItems().get(getIndex()).getQuantityInStock()&& newValue>0) {
+                    commitEdit(newValue);
+                }
+            });
+
+            minusButton.setOnAction(event -> {
+                int newValue = Integer.parseInt(textField.getText()) - 1;
+                if(newValue<=getTableView().getItems().get(getIndex()).getQuantityInStock()&& newValue>0) {
+                    commitEdit(newValue);
+                }
+            });
+
+            textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if (!newValue) {
+                        int newVal = Integer.parseInt(textField.getText());
+                        if(newVal<=getTableView().getItems().get(getIndex()).getQuantityInStock()&& newVal>0) {
+                            commitEdit(newVal);
+                        }else{
+                            cancelEdit();
+                        }
+                    }
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Integer item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty || item == null) {
+                setGraphic(null);
+            } else {
+
+                textField.setText(item.toString());
+                setGraphic(new HBox(3,minusButton , textField, addButton));
+
+            }
+        }
+
+
+        @Override
+        public void startEdit() {
+            super.startEdit();
+            textField.requestFocus();
+            textField.selectAll();
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+            textField.setText(1+"");
+            setGraphic(new HBox(3,minusButton , textField, addButton));
+        }
+        @Override
+        public void commitEdit(Integer newValue) {
+            int  intialQuantityInStock = new DaoDevice().getById(getTableRow().getItem().getIdDevice()).getQuantityInStock();
+            super.commitEdit(newValue);
+            textField.setText(newValue+"");
+            getTableRow().getItem().setQuantity(newValue);
+            int quantityInstock = intialQuantityInStock-newValue;
+            getTableRow().getItem().setQuantityInStock(quantityInstock);
+            getTableRow().getItem().setQuantity(newValue);
+            updateAmount(newValue);
+            setGraphic(new HBox(3,minusButton , textField, addButton));;
+
+        }
+        private void updateAmount(Integer newValue){
+            double amount = newValue * ((Device) getTableRow().getItem()).getPrice();
+
+            getTableRow().getItem().setAmount(amount);
+            getTableView().refresh();
+            stocktable.refresh();
+
+        }
     }
 }
