@@ -33,8 +33,6 @@ public class MainViewController {
 
         // Thêm cột chứa nút
 
-
-
         orderIdColumn.setPrefWidth(130);
         productListColumn.setPrefWidth(555);
         paymentDateColumn.setPrefWidth(200);
