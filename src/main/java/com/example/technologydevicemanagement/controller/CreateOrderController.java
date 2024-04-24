@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
-//import com.example.technologydevicemanagement.model.QuantityCell;
 import database.DAODevice;
 import database.DAOOrder;
 import database.DAOOrderDevices;
@@ -55,9 +54,15 @@ public class CreateOrderController {
     @FXML
     private TableColumn<Device, Device> confirmCol, editBillCol;
     ObservableList<Device> billDevices = FXCollections.observableArrayList();
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private Button clearBtn;
 
     @FXML
     public void initialize() {
+
         idCol.setCellValueFactory(cellData -> cellData.getValue().idDeviceProperty());
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameDeviceProperty());
         imgCol.setCellValueFactory(cellData -> cellData.getValue().urlImgProperty());
@@ -97,7 +102,6 @@ public class CreateOrderController {
         editBillCol.setStyle("-fx-alignment: CENTER;");
         confirmCol.setCellFactory(param -> new TableCell<Device, Device>() {
             final Button btn = new Button("Add To Order");
-
             @Override
             protected void updateItem(Device item, boolean empty) {
                 super.updateItem(item, empty);
@@ -154,6 +158,12 @@ public class CreateOrderController {
         ObservableList<Device> products = FXCollections.observableArrayList();
         products.addAll(new DAODevice().getAll());
         stocktable.setItems(products);
+
+        searchHandle();
+        clearBtn.setOnAction(event -> {
+            searchField.setText("");
+
+        });
     }
     public void payment(){
 
@@ -192,7 +202,6 @@ public class CreateOrderController {
     }
 
     public TableView<Device> getStocktable() {
-
         return stocktable;
     }
     //inner class
@@ -284,5 +293,26 @@ public class CreateOrderController {
             getTableView().refresh();
 
         }
+    }
+
+    @FXML
+    private void searchHandle() {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            ObservableList<Device> filteredList = FXCollections.observableArrayList();
+            filteredList.addAll(new DAODevice().getAll());
+            if(newValue.isEmpty() ||  newValue.isBlank()) {
+                stocktable.setItems(filteredList);
+                return;
+            }
+
+            String keyword = newValue.toLowerCase();
+            filteredList.clear();
+            for (Device device : new DAODevice().getAll()) {
+                if (device.getIdDevice().toLowerCase().contains(keyword)) {
+                    filteredList.add(device);
+                }
+            }
+            stocktable.setItems(filteredList);
+        });
     }
 }

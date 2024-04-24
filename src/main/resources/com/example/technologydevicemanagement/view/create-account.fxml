@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox alignment="CENTER" spacing="10" styleClass="container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.controller.CreateAccountController">
+
+    <Label styleClass="title" text="Create Account" />
+    <TextField fx:id="usernameField" promptText="Username"  />
+
+    <PasswordField promptText="Password" fx:id="passwordField" styleClass="text-field" />
+    <HBox spacing="10">
+        <Label text="Roles:" styleClass="label"/>
+        <VBox>
+            <CheckBox text="Manager" fx:id="adminCheckBox" />
+            <CheckBox text="Staff" fx:id="userCheckBox" />
+        </VBox>
+    </HBox>
+    <Label fx:id="statusLabel" styleClass="status" />
+
+    <Button onAction="#createAccount" styleClass="button" text="Create" />
+</VBox>

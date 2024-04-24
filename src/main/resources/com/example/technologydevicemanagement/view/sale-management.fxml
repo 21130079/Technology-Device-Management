@@ -31,6 +31,11 @@
                         <Insets />
                     </FlowPane.margin>
                 </Button>
+            <Button onAction="#showCreateAccountView" prefHeight="30" prefWidth="120" mnemonicParsing="false" text="Create Account">
+               <FlowPane.margin>
+                  <Insets left="10.0" />
+               </FlowPane.margin>
+            </Button>
                 <Button onAction="#showCreateOrderView" prefHeight="30" prefWidth="120" text="Create Orders">
                     <FlowPane.margin>
                         <Insets left="10.0" right="10.0" />
