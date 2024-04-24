@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class DaoOrderDevices {
+public class DAOOrderDevices {
     public int insert(Device device, String idOrder){
         Connection connection = DBUtil.getConnection();
         try {
@@ -41,7 +41,7 @@ public class DaoOrderDevices {
                 ResultSet resultSet = stm.executeQuery();
                 while(resultSet.next()){
                     String idDevice = resultSet.getString("idDevice");
-                    Device device = new DaoDevice().getById(idDevice);
+                    Device device = new DAODevice().getById(idDevice);
 
                     if(devices.containsKey(idDevice)){
                         devices.put(idDevice,devices.get(idDevice)+1);
@@ -56,7 +56,7 @@ public class DaoOrderDevices {
             return devices;
     }
     public LinkedHashMap<Device, Integer> getListDevice(String idOrder){
-        DaoDevice daoDevice = new DaoDevice();
+        DAODevice daoDevice = new DAODevice();
         LinkedHashMap<Device,Integer> result = new  LinkedHashMap<Device,Integer>();
         for (Map.Entry<String, Integer> entry : getListIdDevice(idOrder).entrySet()) {
             String key = entry.getKey();
@@ -68,6 +68,6 @@ public class DaoOrderDevices {
         return result;
     }
     public static void main(String[] args) {
-        System.out.println(new DaoOrderDevices().getListDevice("1"));
+        System.out.println(new DAOOrderDevices().getListDevice("1"));
     }
 }

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 
-public class DaoDevice {
+public class DAODevice {
     public ArrayList<Device> getAll(){
         Connection connection = DBUtil.getConnection();
         ArrayList<Device> devices = new ArrayList<>();
@@ -84,7 +84,7 @@ public class DaoDevice {
 
 
     public static void main(String[] args) {
-        System.out.println(new DaoDevice().getAll());
+        System.out.println(new DAODevice().getAll());
     }
 
 }

@@ -14,26 +14,18 @@ public class DBUtil {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return connection;
     }
-
-
 
     public static String generateUniqueId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
     }
 
-
-
-
     public static void main(String[] args) {
         getConnection();
     }
-
 }

@@ -1,14 +1,13 @@
 package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.LoginApp;
-import com.example.technologydevicemanagement.SaleManagementApp;
-import database.DaoAccount;
-import javafx.application.Platform;
+import database.DAOAccount;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -40,7 +39,7 @@ public class LoginController {
             error_lb.setText("Please enter Password");
             return;
         }
-        if(!new DaoAccount().checkExits(username,passwd)){
+        if(!new DAOAccount().checkExits(username,passwd)){
 
             error_lb.setText("username or password is wrong !");
             return;
@@ -53,7 +52,7 @@ public class LoginController {
         Platform.runLater(() -> {
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-                Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/sale-management.fxml"));
+                Parent root = FXMLLoader.load(LoginApp.class.getResource("view/dashboard.fxml"));
                 // Tạo một Scene mới
                 Scene scene = new Scene(root, 1200, 700);
                 Stage stage = new Stage();

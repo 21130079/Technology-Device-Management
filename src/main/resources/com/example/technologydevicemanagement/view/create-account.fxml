@@ -5,7 +5,7 @@
 
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
-<VBox alignment="CENTER" spacing="10" styleClass="container" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.controller.CreateAccountController">
+<VBox alignment="CENTER" spacing="10" styleClass="container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.controller.CreateAccountController">
 
     <Label styleClass="title" text="Create Account" />
     <TextField fx:id="usernameField" promptText="Username"  />

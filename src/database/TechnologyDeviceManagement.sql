@@ -1,7 +1,12 @@
-create
-database tdm;
-    use
-tdm;
+create database tdm;
+use tdm;
+
+CREATE TABLE accounts
+(
+		username					NVARCHAR(50) primary key,
+		password          NVARCHAR(255) NOT NULL
+);
+
 CREATE TABLE devices
 (
     idDevice          NVARCHAR(50) primary key,
@@ -18,9 +23,10 @@ CREATE TABLE devices
 CREATE TABLE orders
 (
     idOrder     NVARCHAR(50) primary key,
-    invoiceDate DATE NOT NULL
-
+    invoiceDate DATE NOT NULL,
+		total				FLOAT NOT NULL
 );
+
 CREATE TABLE OrderDevices
 (
     idOrderDevice int AUTO_INCREMENT PRIMARY KEY,
@@ -111,11 +117,38 @@ VALUES ('1', '2024-04-01'),
        ('4', '2024-04-07'),
        ('5', '2024-04-09');
 
-SELECT *
-from devices
+
 -- Dữ liệu cho bảng "OrderDevices"
-    INSERT
-INTO OrderDevices (idOrder, idDevice)
-VALUES
-    ('1', 'ace017' ), ('1', 'ace017'), ('2', 'bea025'), ('2', 'bea025'), ('2', 'bea025');
+INSERT INTO OrderDevices (idOrder, idDevice)
+VALUES ('1', 'ace017' ), ('1', 'ace017'), ('2', 'bea025'), ('2', 'bea025'), ('2', 'bea025');
+
+-- Dữ liệu cho bảng "Accounts"
+INSERT INTO accounts (username, password)
+VALUES ('user', 'user');
+
+
+select invoiceDate, count(idOrder) from orders group by invoiceDate order by timestamp(invoiceDate) desc limit 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

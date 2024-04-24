@@ -1,13 +1,11 @@
 package database;
 
 import com.example.technologydevicemanagement.model.Account;
-import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.util.DBUtil;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-public class DaoAccount {
+public class DAOAccount {
     public boolean checkExits(String username , String passwd){
         Connection connection = DBUtil.getConnection();
 

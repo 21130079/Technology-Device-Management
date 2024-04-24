@@ -1,10 +1,7 @@
 package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.model.Account;
-import database.DaoAccount;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import database.DAOAccount;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -48,7 +45,7 @@ public class CreateAccountController {
     @FXML
     private void createAccount() {
         // Sử dụng danh sách các vai trò đã chọn
-        DaoAccount daoAccount =   new DaoAccount();
+        DAOAccount daoAccount =   new DAOAccount();
         String username= usernameField.getText();
         String passwd = passwordField.getText();
         if(username.trim().equals((""))){
