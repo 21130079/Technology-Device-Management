@@ -1,7 +1,8 @@
 package com.example.technologydevicemanagement.controller;
+
 import com.example.technologydevicemanagement.CreateOrderApp;
 import com.example.technologydevicemanagement.model.Order;
-import database.DaoOrder;
+import database.DAOOrder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,20 +22,18 @@ public class MainViewController {
     @FXML
     TableView historyOrderTable;
     @FXML
-    TableColumn<Order, String> orderIdColumn,productListColumn,paymentDateColumn;
+    TableColumn<Order, String> orderIdColumn, productListColumn, paymentDateColumn;
     @FXML
     TableColumn<Order, Double> amountColumn;
     @FXML
     TableColumn<Order, Order> actionColumn;
     @FXML
     Button createOrder_btn;
+
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         // Thêm cột chứa nút
-
-
-
         orderIdColumn.setPrefWidth(130);
         productListColumn.setPrefWidth(555);
         paymentDateColumn.setPrefWidth(200);
@@ -52,6 +51,7 @@ public class MainViewController {
         paymentDateColumn.setCellValueFactory(cellData -> cellData.getValue().invoiceDateProperty());
         amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
 
+//        System.out.print(cellData.getValue().amountProperty().asObject()));
 
         actionColumn.setCellFactory(param -> new TableCell<Order, Order>() {
             final Button btn = new Button("See Details");
@@ -72,14 +72,16 @@ public class MainViewController {
         getdata();
 
     }
+
     @FXML
-   private void getdata(){
-       ObservableList<Order> orders = FXCollections.observableArrayList();
-        orders.addAll(new DaoOrder().getAll());
-       historyOrderTable.setItems(orders);
-   }
+    private void getdata() {
+        ObservableList<Order> orders = FXCollections.observableArrayList();
+        orders.addAll(new DAOOrder().getAll());
+        historyOrderTable.setItems(orders);
+    }
+
     public void showCreateOrderView(javafx.event.ActionEvent actionEvent) throws IOException {
-      
+
         FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -90,7 +92,8 @@ public class MainViewController {
         stage.setScene(scene);
         stage.show();
     }
-    public void refreshTable(){
+
+    public void refreshTable() {
         historyOrderTable.refresh();
     }
 }
