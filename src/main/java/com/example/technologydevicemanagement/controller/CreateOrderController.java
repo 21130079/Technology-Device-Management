@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
-import com.example.technologydevicemanagement.model.QuantityCell;
+
 import database.DaoDevice;
 import database.DaoOrder;
 import database.DaoOrderDevices;

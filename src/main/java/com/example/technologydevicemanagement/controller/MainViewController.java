@@ -93,4 +93,14 @@ public class MainViewController {
     public void refreshTable(){
         historyOrderTable.refresh();
     }
+
+    // create account
+    @FXML
+    private void showCreateAccountView () throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(CreateOrderApp.class.getResource("view/create-account.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Create Account");
+        stage.show();
+    }
 }
