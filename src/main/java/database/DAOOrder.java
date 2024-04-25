@@ -124,18 +124,4 @@ public class DAOOrder {
             throw new RuntimeException(e);
         }
     }
-
-//    public void setICChartByDate(XYChart.Series chart) {
-//        Connection connection = DBUtil.getConnection();
-//        try {
-//            PreparedStatement stm = connection.prepareStatement("select invoiceDate, count(idOrder) from orders group by invoiceDate order by timestamp(invoiceDate) desc limit 5");
-//            ResultSet resultSet = stm.executeQuery();
-//            while (resultSet.next()) {
-//                double ti = getTIByDate(Date.valueOf(resultSet.getString(1)));
-//                chart.getData().add(new XYChart.Data<>(resultSet.getString(1), ti));
-//            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

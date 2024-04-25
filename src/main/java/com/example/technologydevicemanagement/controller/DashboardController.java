@@ -14,10 +14,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DashboardController implements Initializable {
 
@@ -177,12 +176,41 @@ public class DashboardController implements Initializable {
         dashboard_NOCChart.getData().add(chart);
     }
 
-//    public void dashboardICChartByDate() {
-//        dashboard_ICChart.getData().clear();
-//        XYChart.Series chart = new XYChart.Series<>();
-//        new DAOOrder().setICChartByDate(chart);
-//        dashboard_ICChart.getData().add(chart);
-//    }
+    public void dashboardICChartByDate() {
+        Date date = new Date();
+        long currentDate = date.getTime();
+        ArrayList<Long> sqlDates = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+
+        dates.add(formattedDate);
+        sqlDates.add(currentDate);
+
+
+
+        // Lấy ra 5 ngày gần nhất
+        for (int i = 0; i < 4; i++) {
+            long oneDayInMillis = 24 * 60 * 60 * 1000; // 1 ngày tính bằng milliseconds
+            Date recentDate = new Date(date.getTime() - (i + 1) * oneDayInMillis);
+            sqlDates.add(recentDate.getTime());
+
+            String formattedRecentDate = dateFormat.format(recentDate);
+            dates.add(formattedRecentDate);
+        }
+
+
+        dashboard_ICChart.getData().clear();
+        XYChart.Series chart = new XYChart.Series<>();
+        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(2)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(3)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(4)))));
+
+        dashboard_ICChart.getData().add(chart);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -191,6 +219,6 @@ public class DashboardController implements Initializable {
         dashboardTIByDate();
         dashboardTI();
         dashboardNOCChart();
-//        dashboardICChartByDate();
+        dashboardICChartByDate();
     }
 }
