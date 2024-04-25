@@ -44,7 +44,7 @@ public class LoginController {
             error_lb.setText("username or password is wrong !");
             return;
         }
-
+        Data.username = username;
         hideApplication();
         restartApplication();
     }

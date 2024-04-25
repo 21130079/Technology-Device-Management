@@ -1,12 +1,6 @@
 create database tdm;
 use tdm;
 
-CREATE TABLE accounts
-(
-		username					NVARCHAR(50) primary key,
-		password          NVARCHAR(255) NOT NULL
-);
-
 CREATE TABLE devices
 (
     idDevice          NVARCHAR(50) primary key,
@@ -23,8 +17,7 @@ CREATE TABLE devices
 CREATE TABLE orders
 (
     idOrder     NVARCHAR(50) primary key,
-    invoiceDate DATE NOT NULL,
-		total				FLOAT NOT NULL
+    invoiceDate DATE NOT NULL
 );
 
 CREATE TABLE OrderDevices
@@ -35,20 +28,21 @@ CREATE TABLE OrderDevices
     FOREIGN KEY (idDevice) REFERENCES devices (idDevice),
     FOREIGN KEY (idOrder) REFERENCES orders (idOrder)
 );
+
 create table accounts (
 
                           username varchar(255) PRIMARY KEY,
                           passwd  varchar(20) NOT null
 
 );
+
 create table roles_account(
                               username varchar(255),
                               role NVARCHAR(50),
                               FOREIGN KEY (username) REFERENCES accounts(username),
                               PRIMARY KEY(username,role)
-)
-    insert into accounts(username,passwd)
-    values ('admin','admin');
+);
+
 CREATE TRIGGER generate_idDevice_trigger
     BEFORE INSERT
     ON devices
@@ -122,15 +116,9 @@ VALUES ('1', '2024-04-01'),
 INSERT INTO OrderDevices (idOrder, idDevice)
 VALUES ('1', 'ace017' ), ('1', 'ace017'), ('2', 'bea025'), ('2', 'bea025'), ('2', 'bea025');
 
--- Dữ liệu cho bảng "Accounts"
-INSERT INTO accounts (username, password)
-VALUES ('user', 'user');
 
-
-select invoiceDate, count(idOrder) from orders group by invoiceDate order by timestamp(invoiceDate) desc limit 5
-
-
-
+insert into accounts(username,passwd)
+values ('admin','admin');
 
 
 
