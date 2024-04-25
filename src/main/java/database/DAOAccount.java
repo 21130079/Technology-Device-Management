@@ -18,6 +18,7 @@ public class DAOAccount {
 
                 return true;
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -35,6 +36,7 @@ public class DAOAccount {
 
                 return true;
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -55,6 +57,7 @@ public class DAOAccount {
                     stm.setString(2,role);
                     stm.executeUpdate();
                 }
+                connection.close();
 
                 return 1;
             } catch (SQLException e) {

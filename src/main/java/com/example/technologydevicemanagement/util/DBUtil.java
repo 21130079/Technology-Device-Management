@@ -25,6 +25,14 @@ public class DBUtil {
         return uuid.toString();
     }
 
+    public static void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
         getConnection();
     }
