@@ -20,7 +20,9 @@ public class DAOOrder {
             stm.setString(1, id);
             stm.setDate(2, Date.valueOf(LocalDate.now()));
             stm.executeUpdate();
+            connection.close();
             return id;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -38,6 +40,7 @@ public class DAOOrder {
                 LinkedHashMap<Device, Integer> listDevices = new DAOOrderDevices().getListDevice(id);
                 return new Order(id, listDevices, invoiceDate);
             }
+            connection.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -60,6 +63,7 @@ public class DAOOrder {
 
                 orders.add(order);
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -82,6 +86,7 @@ public class DAOOrder {
 
                 ti += order.amountProperty().get();
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -104,6 +109,7 @@ public class DAOOrder {
 
                 ti += order.amountProperty().get();
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -120,6 +126,7 @@ public class DAOOrder {
             while (resultSet.next()) {
                 chart.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getInt(2)));
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

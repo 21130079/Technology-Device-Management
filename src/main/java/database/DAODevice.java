@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.sql.Date;
 
 public class DAODevice {
-    public ArrayList<Device> getAll(){
+    public ArrayList<Device> getAll() {
         Connection connection = DBUtil.getConnection();
         ArrayList<Device> devices = new ArrayList<>();
         try {
             PreparedStatement stm = connection.prepareStatement("select * from devices");
             ResultSet resultSet = stm.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 String idDevice = resultSet.getString("idDevice");
                 String nameDevice = resultSet.getString("nameDevice");
@@ -35,6 +35,7 @@ public class DAODevice {
                 // Thêm device vào danh sách devices
                 devices.add(device);
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -42,13 +43,14 @@ public class DAODevice {
         return devices;
 
     }
-    public Device getById(String idDevice){
+
+    public Device getById(String idDevice) {
         Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("select * from devices where idDevice = ?");
-            stm.setString(1,idDevice);
+            stm.setString(1, idDevice);
             ResultSet resultSet = stm.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 String nameDevice = resultSet.getString("nameDevice");
                 String category = resultSet.getString("category");
                 double price = resultSet.getDouble("price");
@@ -62,20 +64,23 @@ public class DAODevice {
 
                 return device;
             }
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         return null;
     }
-    public int decreaseQuantity(Device device,int quantity){
+
+    public int decreaseQuantity(Device device, int quantity) {
         Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("update devices set quantityInStock = ? where idDevice =?");
-            stm.setInt(1,quantity);
-            stm.setString(2,device.getIdDevice());
+            stm.setInt(1, quantity);
+            stm.setString(2, device.getIdDevice());
             stm.executeUpdate();
-                return quantity;
+            connection.close();
+            return quantity;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

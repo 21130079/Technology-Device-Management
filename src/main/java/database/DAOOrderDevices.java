@@ -9,13 +9,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class DAOOrderDevices {
+    Connection connection = DBUtil.getConnection();
+
     public int insert(Device device, String idOrder){
-        Connection connection = DBUtil.getConnection();
         try {
             PreparedStatement stm = connection.prepareStatement("insert into OrderDevices(idDevice,idOrder) values (?,?)");
             stm.setString(1,device.getIdDevice());
             stm.setString(2,idOrder);
             stm.executeUpdate();
+            connection.close();
             return 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -23,12 +25,13 @@ public class DAOOrderDevices {
         }
 
     }
-    public int insertAll(ArrayList<Device> devices, String idOrder){
+    public int insertAll(ArrayList<Device> devices, String idOrder) throws SQLException {
        int count =0;
         for (Device device: devices) {
             insert(device,idOrder);
             count++;
         }
+        connection.close();
 
         return count;
     }
@@ -49,6 +52,7 @@ public class DAOOrderDevices {
                         devices.put(idDevice,1);
                     }
                 }
+                connection.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -65,6 +69,11 @@ public class DAOOrderDevices {
             // Thực hiện các thao tác bạn cần với key và value ở đây
         }
 
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return result;
     }
     public static void main(String[] args) {
