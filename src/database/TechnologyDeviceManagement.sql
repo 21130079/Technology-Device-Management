@@ -31,8 +31,8 @@ CREATE TABLE OrderDevices
 
 create table accounts (
 
-                          username varchar(255) PRIMARY KEY,
-                          passwd  varchar(20) NOT null
+			username varchar(255) PRIMARY KEY,
+			passwd  varchar(20) NOT null
 
 );
 

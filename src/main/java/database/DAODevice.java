@@ -7,10 +7,32 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
 
 public class DAODevice {
+    public void insert(Device device) {
+        Connection connection = DBUtil.getConnection();
+        try {
+            PreparedStatement stm = connection.prepareStatement("insert into devices(idDevice,nameDevice,category,price,brand,manufacturingDate,weight,urlImg,quantityInStock) values(?,?,?,?,?,?,?,?,?)");
+            stm.setString(1, device.getIdDevice());
+            stm.setString(2, device.getNameDevice());
+            stm.setString(3, device.getCategory());
+            stm.setDouble(4, device.getPrice());
+            stm.setString(5, device.getBrand());
+            stm.setDate(6, new Date(device.getManufacturingDate().getTime()));
+            stm.setDouble(7, device.getWeight());
+            stm.setString(8, device.getUrlImg());
+            stm.setInt(9, device.getQuantityInStock());
+            stm.executeUpdate();
+            connection.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ArrayList<Device> getAll() {
         Connection connection = DBUtil.getConnection();
         ArrayList<Device> devices = new ArrayList<>();
