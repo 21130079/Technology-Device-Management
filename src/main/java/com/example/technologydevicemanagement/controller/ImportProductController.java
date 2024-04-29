@@ -87,7 +87,7 @@ public class ImportProductController {
             }
             if(daoDevice.getById(inputID.getText()) == null) {
                     Device device = new Device(inputID.getText(), inputName.getText(), inputCate.getText(), Double.parseDouble(inputPrice.getText()), inputBrand.getText(), java.sql.Date.valueOf(inputManufacturing.getValue()), Double.parseDouble(inputWeight.getText()), inputImg.getText(), Integer.parseInt(inputQuantity.getText()));
-                    daoDevice.add(device);
+                    daoDevice.insert(device);
                     stocktable.setItems(FXCollections.observableArrayList(daoDevice.getById(inputID.getText())));
             }else{
                 Device device = daoDevice.getById(inputID.getText());
