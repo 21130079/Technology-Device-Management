@@ -223,9 +223,14 @@
 
 .button {
     -fx-font-size: 16px;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 180px;
     -fx-background-color: #007bff; /* Màu xanh dương */
     -fx-text-fill: white; /* Màu chữ trắng */
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
+    -fx-cursor: pointer;
+}
+
+.button:hover {
+    -fx-background-color: #25bcbf;
 }
