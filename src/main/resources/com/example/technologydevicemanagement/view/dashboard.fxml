@@ -72,15 +72,9 @@
                                         <String fx:value="shadow" />
                                     </styleClass>
                                     <children>
-                                        <Button fx:id="dashboard_btn" layoutX="10.0" layoutY="31.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@style.css" text="Dashboard" />
-                                        <Button fx:id="avaialbeFD_btn" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@style.css" text="Create Order" />
-                                        <Button fx:id="logout" layoutX="13.0" layoutY="299.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="174.0" styleClass="signout" stylesheets="@style.css">
-                                        </Button>
-                                        <Label layoutX="71.0" layoutY="302.0" text="Sign Out">
-                                            <font>
-                                                <Font name="Tahoma" size="15.0" />
-                                            </font>
-                                        </Label>
+                                        <Button fx:id="dashboard_btn" layoutX="10.0" layoutY="31.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Dashboard" />
+                                        <Button fx:id="avaialbeFD_btn" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#openCreateOrder" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Create Order" />
+                                        <Button fx:id="logout" layoutX="13.0" layoutY="299.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="174.0" styleClass="signout" stylesheets="@style.css" text="Log Out" />
                                     </children>
                                 </AnchorPane>
                                 <Separator layoutX="7.0" layoutY="190.0" prefWidth="200.0" />

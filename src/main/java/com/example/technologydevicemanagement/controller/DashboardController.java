@@ -2,6 +2,7 @@ package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.LoginApp;
 import database.DAOOrder;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -220,5 +222,26 @@ public class DashboardController implements Initializable {
         dashboardTI();
         dashboardNOCChart();
         dashboardICChartByDate();
+    }
+
+    public void openCreateOrder() {
+        Platform.runLater(() -> {
+            try {
+                // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+                Parent root = FXMLLoader.load(LoginApp.class.getResource("view/create-order.fxml"));
+                // Tạo một Scene mới
+                Scene scene = new Scene(root, 1200, 700);
+                Stage stage = new Stage();
+                // Đặt scene cho stage
+                stage.setScene(scene);
+
+                // Hiển thị stage
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
+        stage.hide();
     }
 }
