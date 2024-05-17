@@ -1,8 +1,16 @@
 package com.example.technologydevicemanagement.controller;
 
+import com.example.technologydevicemanagement.CreateOrderApp;
+import com.example.technologydevicemanagement.DashboardApp;
 import com.example.technologydevicemanagement.LoginApp;
+import com.example.technologydevicemanagement.SaleManagementApp;
+import com.example.technologydevicemanagement.model.Device;
+import com.example.technologydevicemanagement.model.Order;
 import database.DAOOrder;
+import database.DAOOrderDevices;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,56 +18,36 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.List;
 
 public class DashboardController implements Initializable {
 
+    private Order orderUpdate;
     @FXML
-    private Button avaialbeFD_btn;
+    TableView historyOrderTable;
+    @FXML
+    TableColumn<Order, String> orderIdColumn, productListColumn, paymentDateColumn;
+    @FXML
+    TableColumn<Order, Double> amountColumn;
 
     @FXML
-    private Button availableFD_addBtn;
+    TableColumn<Order, Order> featuresColumn;
 
-    @FXML
-    private Button availableFD_clearBtn;
-
-    @FXML
-    private Button availableFD_deleteBtn;
-
-    @FXML
-    private AnchorPane availableFD_form;
-
-    @FXML
-    private TextField availableFD_productID;
-
-    @FXML
-    private TextField availableFD_productName;
-
-    @FXML
-    private TextField availableFD_productPrice;
-
-    @FXML
-    private ComboBox<?> availableFD_productStatus;
-
-    @FXML
-    private ComboBox<?> availableFD_productType;
-
-    @FXML
-    private TextField availableFD_search;
-
-    @FXML
-    private Button availableFD_updateBtn;
-
-    @FXML
-    private Button close;
 
     @FXML
     private AreaChart<?, ?> dashboard_ICChart;
@@ -76,8 +64,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Label dashboard_TIncome;
 
-    @FXML
-    private Button dashboard_btn;
 
     @FXML
     private AnchorPane dashboard_form;
@@ -86,46 +72,32 @@ public class DashboardController implements Initializable {
     private Button logout;
 
     @FXML
-    private AnchorPane main_form;
-
-    @FXML
-    private Button minimize;
-
-    @FXML
-    private Button order_addBtn;
-
-    @FXML
-    private TextField order_amount;
-
-    @FXML
-    private Label order_balance;
-
-    @FXML
-    private AnchorPane order_form;
-
-    @FXML
-    private Button order_payBtn;
-
-    @FXML
-    private ComboBox<?> order_productID;
-
-    @FXML
-    private ComboBox<?> order_productName;
-
-    @FXML
-    private Spinner<?> order_quantity;
-
-    @FXML
-    private Button order_receiptBtn;
-
-    @FXML
-    private Button order_removeBtn;
-
-    @FXML
-    private Label order_total;
-
+    private AnchorPane historyOrders;
     @FXML
     private Label username;
+
+    @FXML
+    private TextField orderid;
+
+    @FXML
+    private TableView<Device> productsTable;
+
+    @FXML
+    private DatePicker dateT;
+    @FXML
+    private TableColumn<Device, String> id;
+
+    @FXML
+    private TableColumn<Device, String> name;
+
+    @FXML
+    private TableColumn<Device, Integer> quantity;
+
+    @FXML
+    private TableColumn<Device, Double> price;
+
+    @FXML
+    private TableColumn<Device, Void> delete;
 
     public void displayUsername() {
         String name = Data.username;
@@ -216,16 +188,17 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        displayUsername();
+      displayUsername();
         dashboardNC();
         dashboardTIByDate();
         dashboardTI();
         dashboardNOCChart();
         dashboardICChartByDate();
+        data();
     }
 
     public void openCreateOrder() {
-        Platform.runLater(() -> {
+
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
                 Parent root = FXMLLoader.load(LoginApp.class.getResource("view/create-order.fxml"));
@@ -240,8 +213,169 @@ public class DashboardController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+
         Stage stage = (Stage) dashboard_TI.getScene().getWindow();
         stage.hide();
+    }
+    public void openUpdateOrder() {
+
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(LoginApp.class.getResource("view/update-order.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
+        stage.hide();
+
+    }
+
+
+
+    @FXML
+    private void showHistoryOrders() {
+        // Hide other forms
+        dashboard_form.setVisible(false);
+
+        // Show history orders
+        historyOrders.setVisible(true);
+    }
+    @FXML
+    private void showDashboard(){
+        dashboard_form.setVisible(true);
+        historyOrders.setVisible(false);
+    }
+    public void data() {
+
+
+        // can giua cac o
+        orderIdColumn.setStyle("-fx-alignment: CENTER;");
+        productListColumn.setStyle("-fx-alignment: CENTER;");
+        paymentDateColumn.setStyle("-fx-alignment: CENTER;");
+        amountColumn.setStyle("-fx-alignment: CENTER;");
+
+        featuresColumn.setStyle("-fx-alignment: CENTER;");
+        // thiêt lập du liêu cho các cột
+        orderIdColumn.setCellValueFactory(cellData -> cellData.getValue().idOrderProperty());
+        productListColumn.setCellValueFactory(cellData -> cellData.getValue().productListProperty());
+        paymentDateColumn.setCellValueFactory(cellData -> cellData.getValue().invoiceDateProperty());
+        amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
+//        Image upimg = new Image(DashboardController.class.getResourceAsStream("../resources/img/edit.png"));
+//        ImageView iconUpdate = new ImageView(upimg);
+//        iconUpdate.setFitWidth(16);
+//        iconUpdate.setFitHeight(16);
+//        ImageView iconDelete = new ImageView(new Image(getClass().getResourceAsStream("../resources/img/edit.png")));
+//        iconDelete.setFitWidth(16);
+//        iconDelete.setFitHeight(16);
+
+
+        featuresColumn.setCellFactory(param -> new TableCell<Order, Order>() {
+
+            final Button btnUpdate = new Button("Update");
+
+            final Button btnDelete = new Button("Delete");
+            final HBox buttonsBox = new HBox(btnUpdate, btnDelete);
+
+//                btnUpdate.setGraphic(iconUpdate);
+//                btnDelete.setGraphic(iconDelete);
+                {
+                    // Thiết lập hành động cho nút Update
+                    btnUpdate.setOnAction(event -> {
+                        Order order = getTableView().getItems().get(getIndex());
+                        updateOrder(order);
+                    });
+
+                    // Thiết lập hành động cho nút Delete
+                    btnDelete.setOnAction(event -> {
+                        Order order = getTableView().getItems().get(getIndex());
+
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirm Delete");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Are you sure you want to delete order?");
+                        Optional<ButtonType> option = alert.showAndWait();
+
+                        if (option.get().equals(ButtonType.OK)) {
+                            deleteOrder(order);
+                        }
+                    });
+                    buttonsBox.setStyle("-fx-alignment: CENTER;");
+
+                }
+
+
+            @Override
+            protected void updateItem(Order item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(buttonsBox);
+
+                }
+            }
+
+            private void updateOrder(Order order) {
+                // Thêm logic để hiển thị chi tiết đơn hàng
+                System.out.println("Order details: " + order);
+                Data.getInstance().setUpdatedOrder(order);
+                openUpdateOrder();
+
+                // Bạn có thể mở một cửa sổ mới hoặc cập nhật giao diện để hiển thị chi tiết đơn hàng
+            }
+
+            private void deleteOrder(Order order) {
+                // Thêm logic để xóa đơn hàng
+                System.out.println("Delete order: " + order);
+                new DAOOrder().delete(order.getIdOrder());
+                getdata();
+                refreshTable();
+                // Bạn có thể xóa đơn hàng khỏi dữ liệu hoặc thực hiện hành động tương ứng
+            }
+        });
+
+
+        getdata();
+
+    }
+
+
+
+    @FXML
+    private void getdata() {
+        ObservableList<Order> orders = FXCollections.observableArrayList();
+        orders.addAll(new DAOOrder().getAll());
+        historyOrderTable.setItems(orders);
+    }
+
+    public void showCreateOrderView(javafx.event.ActionEvent actionEvent) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        // Lấy Stage hiện tại từ button
+        Stage stage = new Stage();
+        // Set giao diện mới
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void refreshTable() {
+        historyOrderTable.refresh();
+    }
+
+    public Order getOrderUpdate() {
+        return orderUpdate;
     }
 }

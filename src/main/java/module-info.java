@@ -7,6 +7,7 @@ module com.example.technologydevicemanagement {
     requires java.desktop;
 
     requires java.sql;
+    requires mysql.connector.java;
 
     exports com.example.technologydevicemanagement.controller;
     opens com.example.technologydevicemanagement.controller to javafx.fxml;

@@ -28,6 +28,33 @@ public class DAOOrder {
         }
 
     }
+    public void update(Order order) {
+        Connection connection = DBUtil.getConnection();
+        try {
+            PreparedStatement stm = connection.prepareStatement("UPDATE Orders SET invoiceDate = ? WHERE idOrder = ?");
+            stm.setDate(1, order.getInvoiceDate());
+            stm.setString(2, order.getIdOrder());
+            stm.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void delete(String orderId) {
+        Connection connection = DBUtil.getConnection();
+        try {
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM OrderDevices WHERE idOrder = ?");
+            stm.setString(1, orderId);
+            stm.executeUpdate();
+            stm = connection.prepareStatement("DELETE FROM Orders WHERE idOrder = ?");
+            stm.setString(1, orderId);
+            stm.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public Order getById(String id) {
         Connection connection = DBUtil.getConnection();
