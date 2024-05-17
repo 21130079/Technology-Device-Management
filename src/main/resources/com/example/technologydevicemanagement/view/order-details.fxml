@@ -4,28 +4,39 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.SaleManagementApp">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.controller.OrderDetailsController">
    <children>
       <Label layoutX="242.0" layoutY="33.0" text="Order Details">
          <font>
             <Font name="Droid Sans Bold" size="18.0" />
          </font>
       </Label>
-      <TableView layoutY="73.0" prefHeight="229.0" prefWidth="600.0">
+      <TableView fx:id="productTable" layoutY="73.0" prefHeight="229.0" prefWidth="600.0">
         <columns>
-          <TableColumn  prefWidth="377.00000607967377" text="Name product" />
-          <TableColumn prefWidth="81.39996337890625" text="Quantity" />
-            <TableColumn minWidth="0.0" prefWidth="141.39999389648438" text="Price" />
+          <TableColumn fx:id="name" prefWidth="377.00000607967377" text="Name product" />
+          <TableColumn fx:id="quantity" prefWidth="81.39996337890625" text="Quantity" />
+            <TableColumn fx:id="price" minWidth="0.0" prefWidth="141.39999389648438" text="Price" />
         </columns>
       </TableView>
-      <Label layoutX="442.0" layoutY="337.0" text="Time">
+      <Label layoutX="48.0" layoutY="339.0" text="Amout">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="441.0" layoutY="310.0" text="Total">
+      <Label fx:id="amount" alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="342.0" prefHeight="18.0" prefWidth="65.0" text="0" textAlignment="CENTER" textFill="#ea0a0a" textOverrun="CENTER_ELLIPSIS">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" text="Back" />
+      <Label fx:id="orderdate" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="342.0" prefHeight="22.0" prefWidth="101.0" text="12/12/2002" textAlignment="CENTER" textFill="#ec1919" textOverrun="CENTER_ELLIPSIS">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="242.0" layoutY="339.0" text="Order date">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
    </children>

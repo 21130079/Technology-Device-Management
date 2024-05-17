@@ -2,16 +2,20 @@ package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.LoginApp;
 import database.DAOAccount;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.application.Platform;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+
+import java.awt.event.KeyEvent;
 
 import java.io.IOException;
 
@@ -48,8 +52,30 @@ public class LoginController {
         hideApplication();
         restartApplication();
     }
+    @FXML
+    public void initialize() {
+        LoginByKey();
+    }
+    public void LoginByKey(){
+        password_f.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
+            @Override
+            public void handle(javafx.scene.input.KeyEvent event) {
+                // Kiểm tra xem phím Enter được nhấn
+                if (event.getCode() == KeyCode.ENTER) {
+                    // Xử lý khi phím Enter được nhấn
+                    checkLogin();
+                    System.out.println("Enter key pressed in PasswordField");
+                    // Thực hiện các hành động khác ở đây...
+                }
+            }
+
+
+        });
+    }
+
+
     public void restartApplication() {
-        Platform.runLater(() -> {
+
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
                 Parent root = FXMLLoader.load(LoginApp.class.getResource("view/dashboard.fxml"));
@@ -64,7 +90,7 @@ public class LoginController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+
     }
     @FXML
     private void hideApplication() {

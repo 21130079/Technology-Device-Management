@@ -17,7 +17,7 @@ public class DAOOrderDevices {
             stm.setString(1,device.getIdDevice());
             stm.setString(2,idOrder);
             stm.executeUpdate();
-            connection.close();
+
             return 1;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -25,12 +25,31 @@ public class DAOOrderDevices {
         }
 
     }
-    public int insertAll(ArrayList<Device> devices, String idOrder) throws SQLException {
-       int count =0;
-        for (Device device: devices) {
-            insert(device,idOrder);
-            count++;
+    private void delete(String orderId) throws SQLException {
+        PreparedStatement stm = connection.prepareStatement("DELETE FROM OrderDevices WHERE idOrder = ?");
+        stm.setString(1, orderId);
+        stm.executeUpdate();
+    }
+    public void update(LinkedHashMap<Device,Integer> devices, String idOrder){
+        try {
+            delete(idOrder);
+            insertAll(devices,idOrder);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
+    }
+    public int insertAll(LinkedHashMap<Device,Integer> devices, String idOrder) throws SQLException {
+       int count =0;
+        for (Map.Entry<Device, Integer> entry : devices.entrySet()) {
+            Device device = entry.getKey(); // Lấy ra key (Device)
+            int quantity = entry.getValue(); // Lấy ra value (Integer)
+            for (int i =0; i<quantity; i++){
+                insert(device,idOrder);
+                count++;
+            }
+        }
+
         connection.close();
 
         return count;

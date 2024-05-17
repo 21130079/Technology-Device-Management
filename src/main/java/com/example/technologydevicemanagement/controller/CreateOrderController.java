@@ -165,6 +165,9 @@ public class CreateOrderController {
 
         });
     }
+    public void backToDashboard(){
+        restartApplication();
+    }
     public void payment(){
 
             String id = new DAOOrder().insert();
@@ -183,10 +186,10 @@ public class CreateOrderController {
         restartApplication();
     }
     public void restartApplication() {
-        Platform.runLater(() -> {
+
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-                Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/sale-management.fxml"));
+                Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
                 // Tạo một Scene mới
                 Scene scene = new Scene(root, 1200, 700);
                  Stage stage = new Stage();
@@ -195,10 +198,11 @@ public class CreateOrderController {
 
                 // Hiển thị stage
                 stage.show();
+                searchField.getScene().getWindow().hide();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        });
+
     }
 
     public TableView<Device> getStocktable() {

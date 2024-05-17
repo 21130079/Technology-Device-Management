@@ -5,19 +5,22 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 public class DBUtil {
-    private static Connection connection;
+   
     private static String url = "jdbc:mysql://localhost:3306/tdm";
     private static String user = "root";
     private static String password = "";
 
     public static Connection getConnection(){
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, password);
+            Connection connection = DriverManager.getConnection(url, user, password);
+            return connection;
         } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+             throw new RuntimeException(e);
         }
-        return connection;
+
+
     }
 
     public static String generateUniqueId() {
@@ -25,13 +28,7 @@ public class DBUtil {
         return uuid.toString();
     }
 
-    public static void closeConnection() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     public static void main(String[] args) {
         getConnection();

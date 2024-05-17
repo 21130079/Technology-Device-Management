@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public class Order {
         this.listDevice = listDevice;
     }
 
-    public Date getInvoiceDate() {
+    public java.sql.Date getInvoiceDate() {
         return invoiceDate;
     }
 
