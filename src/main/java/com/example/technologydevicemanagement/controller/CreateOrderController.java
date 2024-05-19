@@ -1,6 +1,7 @@
 package com.example.technologydevicemanagement.controller;
 
 
+import com.example.technologydevicemanagement.LoginApp;
 import com.example.technologydevicemanagement.SaleManagementApp;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -24,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class CreateOrderController {
 
@@ -102,6 +104,7 @@ public class CreateOrderController {
         editBillCol.setStyle("-fx-alignment: CENTER;");
         confirmCol.setCellFactory(param -> new TableCell<Device, Device>() {
             final Button btn = new Button("Add To Order");
+
             @Override
             protected void updateItem(Device item, boolean empty) {
                 super.updateItem(item, empty);
@@ -165,54 +168,56 @@ public class CreateOrderController {
 
         });
     }
-    public void backToDashboard(){
+
+    public void backToDashboard() {
         restartApplication();
     }
-    public void payment(){
 
-            String id = new DAOOrder().insert();
-            System.out.println(id);
-            DAOOrderDevices daoOrderDevices = new DAOOrderDevices();
-            DAODevice daoDevice = new DAODevice();
+    public void payment() {
+        String id = new DAOOrder().insert();
+        System.out.println(id);
+        DAOOrderDevices daoOrderDevices = new DAOOrderDevices();
+        DAODevice daoDevice = new DAODevice();
         for (Device device : billDevices) {
-            for (int i = 0 ; i < device.getQuantity() ; i++) {
+            for (int i = 0; i < device.getQuantity(); i++) {
                 daoOrderDevices.insert(device, id);
                 daoDevice.decreaseQuantity(device, device.getQuantityInStock());
             }
         }
-            billDevices.clear();
-            billTable.refresh();
-//            new MainViewController().refreshTable();
+        billDevices.clear();
+        billTable.refresh();
+
         restartApplication();
     }
+
     public void restartApplication() {
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root, 1200, 700);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            stage.setScene(scene);
 
-            try {
-                // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-                Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
-                // Tạo một Scene mới
-                Scene scene = new Scene(root, 1200, 700);
-                 Stage stage = new Stage();
-                // Đặt scene cho stage
-                stage.setScene(scene);
-
-                // Hiển thị stage
-                stage.show();
-                searchField.getScene().getWindow().hide();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            // Hiển thị stage
+            stage.show();
+            searchField.getScene().getWindow().hide();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public TableView<Device> getStocktable() {
         return stocktable;
     }
+
     //inner class
     public class QuantityCell extends TableCell<Device, Integer> {
         private final TextField textField = new TextField();
         private final Button addButton = new Button("+");
         private final Button minusButton = new Button("-");
+
         public QuantityCell() {
 
             textField.setPrefWidth(60);
@@ -221,14 +226,14 @@ public class CreateOrderController {
             minusButton.setPrefWidth(25);
             addButton.setOnAction(event -> {
                 int newValue = Integer.parseInt(textField.getText()) + 1;
-                if(newValue<=getTableView().getItems().get(getIndex()).getQuantityInStock()&& newValue>0) {
+                if (newValue <= getTableView().getItems().get(getIndex()).getQuantityInStock() && newValue > 0) {
                     commitEdit(newValue);
                 }
             });
 
             minusButton.setOnAction(event -> {
                 int newValue = Integer.parseInt(textField.getText()) - 1;
-                if(newValue<=getTableView().getItems().get(getIndex()).getQuantityInStock()&& newValue>0) {
+                if (newValue <= getTableView().getItems().get(getIndex()).getQuantityInStock() && newValue > 0) {
                     commitEdit(newValue);
                 }
             });
@@ -239,9 +244,9 @@ public class CreateOrderController {
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     if (!newValue) {
                         int newVal = Integer.parseInt(textField.getText());
-                        if(newVal<=getTableView().getItems().get(getIndex()).getQuantityInStock()&& newVal>0) {
+                        if (newVal <= getTableView().getItems().get(getIndex()).getQuantityInStock() && newVal > 0) {
                             commitEdit(newVal);
-                        }else{
+                        } else {
                             cancelEdit();
                         }
                     }
@@ -258,7 +263,7 @@ public class CreateOrderController {
             } else {
 
                 textField.setText(item.toString());
-                setGraphic(new HBox(3,minusButton , textField, addButton));
+                setGraphic(new HBox(3, minusButton, textField, addButton));
 
             }
         }
@@ -274,23 +279,26 @@ public class CreateOrderController {
         @Override
         public void cancelEdit() {
             super.cancelEdit();
-            textField.setText(1+"");
-            setGraphic(new HBox(3,minusButton , textField, addButton));
+            textField.setText(1 + "");
+            setGraphic(new HBox(3, minusButton, textField, addButton));
         }
+
         @Override
         public void commitEdit(Integer newValue) {
-            int  intialQuantityInStock = new DAODevice().getById(getTableRow().getItem().getIdDevice()).getQuantityInStock();
+            int intialQuantityInStock = new DAODevice().getById(getTableRow().getItem().getIdDevice()).getQuantityInStock();
             super.commitEdit(newValue);
-            textField.setText(newValue+"");
+            textField.setText(newValue + "");
             getTableRow().getItem().setQuantity(newValue);
-            int quantityInstock = intialQuantityInStock-newValue;
+            int quantityInstock = intialQuantityInStock - newValue;
             getTableRow().getItem().setQuantityInStock(quantityInstock);
             getTableRow().getItem().setQuantity(newValue);
             updateAmount(newValue);
-            setGraphic(new HBox(3,minusButton , textField, addButton));;
+            setGraphic(new HBox(3, minusButton, textField, addButton));
+            ;
 
         }
-        private void updateAmount(Integer newValue){
+
+        private void updateAmount(Integer newValue) {
             double amount = newValue * ((Device) getTableRow().getItem()).getPrice();
             System.out.println(amount);
             getTableRow().getItem().setAmount(amount);
@@ -304,7 +312,7 @@ public class CreateOrderController {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             ObservableList<Device> filteredList = FXCollections.observableArrayList();
             filteredList.addAll(new DAODevice().getAll());
-            if(newValue.isEmpty() ||  newValue.isBlank()) {
+            if (newValue.isEmpty() || newValue.isBlank()) {
                 stocktable.setItems(filteredList);
                 return;
             }
@@ -318,5 +326,21 @@ public class CreateOrderController {
             }
             stocktable.setItems(filteredList);
         });
+    }
+
+    public void confirmPayment() {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Payment");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you have made the payment ?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if (option.get().equals(ButtonType.OK)) {
+                payment();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

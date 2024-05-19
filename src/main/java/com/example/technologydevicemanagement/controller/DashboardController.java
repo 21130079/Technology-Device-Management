@@ -1,14 +1,10 @@
 package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.CreateOrderApp;
-import com.example.technologydevicemanagement.DashboardApp;
 import com.example.technologydevicemanagement.LoginApp;
-import com.example.technologydevicemanagement.SaleManagementApp;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 import database.DAOOrder;
-import database.DAOOrderDevices;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,19 +17,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
-import java.util.List;
 
 public class DashboardController implements Initializable {
 
@@ -64,7 +55,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Label dashboard_TIncome;
 
-
     @FXML
     private AnchorPane dashboard_form;
 
@@ -73,6 +63,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private AnchorPane historyOrders;
+
     @FXML
     private Label username;
 
@@ -98,6 +89,15 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableColumn<Device, Void> delete;
+
+    @FXML
+    private Button date_btn;
+
+    @FXML
+    private Button month_btn;
+
+    @FXML
+    private Button year_btn;
 
     public void displayUsername() {
         String name = Data.username;
@@ -139,15 +139,46 @@ public class DashboardController implements Initializable {
         dashboard_TI.setText("$" + String.valueOf(ti));
     }
 
+    public void dashboardTIByMonth() {
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        double ti = new DAOOrder().getTIByMonth(sqlDate);
+        dashboard_TI.setText("$" + String.valueOf(ti));
+    }
+
+    public void dashboardTIByYear() {
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        double ti = new DAOOrder().getTIByYear(sqlDate);
+        dashboard_TI.setText("$" + String.valueOf(ti));
+    }
+
     public void dashboardTI() {
         dashboard_TIncome.setText("$" + String.valueOf(new DAOOrder().getTI()));
     }
 
-    public void dashboardNOCChart() {
+    public void dashboardNOCChartByDate() {
         dashboard_NOCChart.getData().clear();
         XYChart.Series chart = new XYChart.Series<>();
         new DAOOrder().setNOCChartByDate(chart);
         dashboard_NOCChart.getData().add(chart);
+        dashboard_NOCChart.setLegendVisible(false);
+    }
+
+    public void dashboardNOCChartByMonth() {
+        dashboard_NOCChart.getData().clear();
+        XYChart.Series chart = new XYChart.Series<>();
+        new DAOOrder().setNOCChartByMonth(chart);
+        dashboard_NOCChart.getData().add(chart);
+        dashboard_NOCChart.setLegendVisible(false);
+    }
+
+    public void dashboardNOCChartByYear() {
+        dashboard_NOCChart.getData().clear();
+        XYChart.Series chart = new XYChart.Series<>();
+        new DAOOrder().setNOCChartByYear(chart);
+        dashboard_NOCChart.getData().add(chart);
+        dashboard_NOCChart.setLegendVisible(false);
     }
 
     public void dashboardICChartByDate() {
@@ -176,6 +207,7 @@ public class DashboardController implements Initializable {
 
 
         dashboard_ICChart.getData().clear();
+        dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
         chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.getFirst()))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
@@ -186,13 +218,87 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().add(chart);
     }
 
+    public void dashboardICChartByMonth() {
+        Date date = new Date();
+        long currentDate = date.getTime();
+        ArrayList<Long> sqlDates = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+
+        dates.add(formattedDate);
+        sqlDates.add(currentDate);
+
+
+
+        // Lấy ra 5 tháng gần nhất
+        for (int i = 0; i < 4; i++) {
+            long oneMonthInMillis = 24 * 60 * 60 * 1000 * 30; // 1 tháng tính bằng milliseconds
+            Date recentMonth = new Date(date.getTime() - (i + 1) * oneMonthInMillis);
+            sqlDates.add(recentMonth.getTime());
+
+            String formattedRecentMonth = dateFormat.format(recentMonth);
+            dates.add(formattedRecentMonth);
+        }
+
+
+        dashboard_ICChart.getData().clear();
+        dashboard_ICChart.setLegendVisible(false);
+        XYChart.Series chart = new XYChart.Series<>();
+        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(1)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(2)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(3)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(4)))));
+
+        dashboard_ICChart.getData().add(chart);
+    }
+
+    public void dashboardICChartByYear() {
+        Date date = new Date();
+        long currentDate = date.getTime();
+        ArrayList<Long> sqlDates = new ArrayList<>();
+        ArrayList<String> dates = new ArrayList<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = dateFormat.format(currentDate);
+
+        dates.add(formattedDate);
+        sqlDates.add(currentDate);
+
+
+
+        // Lấy ra 5 năm gần nhất
+        for (int i = 0; i < 4; i++) {
+            long oneYearInMillis = 24 * 60 * 60 * 1000 * 30 * 12; // 1 năm tính bằng milliseconds
+            Date recentYear = new Date(date.getTime() - (i + 1) * oneYearInMillis);
+            sqlDates.add(recentYear.getTime());
+
+            String formattedRecentYear = dateFormat.format(recentYear);
+            dates.add(formattedRecentYear);
+        }
+
+
+        dashboard_ICChart.getData().clear();
+        dashboard_ICChart.setLegendVisible(false);
+        XYChart.Series chart = new XYChart.Series<>();
+        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(1)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(2)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(3)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(4)))));
+
+        dashboard_ICChart.getData().add(chart);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
       displayUsername();
         dashboardNC();
         dashboardTIByDate();
         dashboardTI();
-        dashboardNOCChart();
+        dashboardNOCChartByDate();
         dashboardICChartByDate();
         data();
     }
@@ -344,9 +450,7 @@ public class DashboardController implements Initializable {
             }
         });
 
-
         getdata();
-
     }
 
 
@@ -369,6 +473,24 @@ public class DashboardController implements Initializable {
         // Set giao diện mới
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void showRevenueByDate() {
+        dashboardTIByDate();
+        dashboardNOCChartByDate();
+        dashboardICChartByDate();
+    }
+
+    public void showRevenueByMonth() {
+        dashboardTIByMonth();
+        dashboardNOCChartByMonth();
+        dashboardICChartByMonth();
+    }
+
+    public void showRevenueByYear() {
+        dashboardTIByYear();
+        dashboardNOCChartByYear();
+        dashboardICChartByYear();
     }
 
     public void refreshTable() {

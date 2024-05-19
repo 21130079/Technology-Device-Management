@@ -10,27 +10,27 @@ public class DBUtil {
     private static String user = "root";
     private static String password = "";
 
-    public static Connection getConnection(){
+    private static Connection connection = null;
+
+    public static Connection doConnection(){
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(url, user, password);
             return connection;
         } catch (SQLException | ClassNotFoundException e) {
              throw new RuntimeException(e);
         }
-
-
     }
+
+    public static Connection getConnection() {
+        return connection;
+    }
+
+
 
     public static String generateUniqueId() {
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
-    }
-
-
-
-    public static void main(String[] args) {
-        getConnection();
     }
 }

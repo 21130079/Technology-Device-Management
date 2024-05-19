@@ -20,7 +20,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="1202.0">
 
                <children>
-                  <Button onAction="#backToDashboard" alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" text="Back">
+                  <Button alignment="TOP_LEFT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToDashboard" text="Back">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
@@ -89,7 +89,7 @@
                   </TableView>
                   <VBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="1195.0">
                      <children>
-                        <Button fx:id="payment_btn" mnemonicParsing="false" onAction="#payment" text="Payment">
+                        <Button fx:id="payment_btn" mnemonicParsing="false" onAction="#confirmPayment" text="Payment">
                            <VBox.margin>
                               <Insets right="10.0" />
                            </VBox.margin>
