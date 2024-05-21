@@ -25,7 +25,7 @@ import java.util.LinkedHashMap;
 import java.util.Optional;
 
 
-public class updateOrderController {
+public class UpdateOrderController {
     @FXML
     private TextField orderid;
 

@@ -1,12 +1,49 @@
 package database;
 
 import com.example.technologydevicemanagement.model.Account;
+import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.util.DBUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DAOAccount {
     Connection connection = DBUtil.getConnection();
+
+    public ArrayList<Account> getAll() {
+        ArrayList<Account> accounts = new ArrayList<>();
+        try {
+            PreparedStatement stm = connection.prepareStatement("select * from accounts");
+            ResultSet resultSet = stm.executeQuery();
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("passwd");
+
+                // Tạo một PreparedStatement mới để lấy roles từ bảng roles_account
+                PreparedStatement rolesStm = connection.prepareStatement("select role from roles_account where username = ?");
+                rolesStm.setString(1, username);
+                ResultSet rolesResultSet = rolesStm.executeQuery();
+
+                // Tạo một ArrayList để lưu trữ roles
+                ArrayList<String> roles = new ArrayList<>();
+
+                // Thêm mỗi role vào ArrayList
+                while (rolesResultSet.next()) {
+                    roles.add(rolesResultSet.getString("role"));
+                }
+
+                // Tạo đối tượng Account từ các giá trị lấy được từ ResultSet
+                Account account = new Account(username, password, roles);
+
+                // Thêm account vào danh sách accounts
+                accounts.add(account);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return accounts;
+    }
 
     public boolean checkExits(String username, String passwd) {
 
