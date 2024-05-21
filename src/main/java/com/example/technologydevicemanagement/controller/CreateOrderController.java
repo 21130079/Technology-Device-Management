@@ -58,7 +58,6 @@ public class CreateOrderController {
     ObservableList<Device> billDevices = FXCollections.observableArrayList();
     @FXML
     private TextField searchField;
-
     @FXML
     private Button clearBtn;
 

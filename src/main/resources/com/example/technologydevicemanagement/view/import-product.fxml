@@ -17,117 +17,131 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.technologydevicemanagement.controller.ImportProductController">
    <children>
-      <HBox prefHeight="700.0" prefWidth="1200.0">
+      <VBox layoutY="-2.0" prefHeight="705.0" prefWidth="1199.0">
          <children>
-            <VBox prefHeight="700.0" prefWidth="378.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="1199.0">
                <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.6000213623047" minWidth="10.0" prefWidth="142.7333221435547" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.60000610351562" minWidth="10.0" prefWidth="215.2666778564453" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Device:">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name Device:" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brand:" GridPane.rowIndex="2">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Device:" GridPane.rowIndex="3">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category:" GridPane.rowIndex="4">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.rowIndex="5">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" GridPane.rowIndex="7">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" GridPane.rowIndex="8">
-                           <GridPane.margin>
-                              <Insets left="5.0" />
-                           </GridPane.margin>
-                        </Text>
-                        <TextField fx:id="inputID" GridPane.columnIndex="1" />
-                        <TextField fx:id="inputName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="inputBrand" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="inputImg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextField fx:id="inputCate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="inputWeight" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField fx:id="inputQuantity" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <TextField fx:id="inputPrice" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacturing Date:" GridPane.rowIndex="6" />
-                        <DatePicker fx:id="inputManufacturing" prefHeight="26.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </GridPane>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Pane prefHeight="100.0" prefWidth="198.0">
-                           <children>
-                              <Button fx:id="reseetBtn" layoutX="35.0" layoutY="28.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Reset" />
-                           </children>
-                        </Pane>
-                        <Pane prefHeight="100.0" prefWidth="219.0">
-                           <children>
-                              <Button fx:id="addBtn" layoutX="45.0" layoutY="27.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Add" />
-                           </children>
-                        </Pane>
-                     </children>
-                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#backToDashboard" prefHeight="26.0" prefWidth="64.0" text="Back">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox prefHeight="700.0" prefWidth="857.0">
+            </HBox>
+            <HBox prefHeight="700.0" prefWidth="1200.0">
                <children>
-                  <TableView fx:id="stocktable" prefHeight="709.0" prefWidth="820.0">
-                    <columns>
-                      <TableColumn fx:id="idCol" prefWidth="88.26666563749313" text="ID Device" />
-                      <TableColumn fx:id="nameCol" prefWidth="138.13336181640625" text="Name Device" />
-                        <TableColumn fx:id="brandCol" prefWidth="80.53324890136719" text="Brand" />
-                        <TableColumn fx:id="imgCol" prefWidth="163.46673583984375" text="Image Device" />
-                        <TableColumn fx:id="cateCol" prefWidth="92.800048828125" text="Category" />
-                        <TableColumn fx:id="weightCol" prefWidth="80.53338623046875" text="Weight" />
-                        <TableColumn fx:id="qISCol" prefWidth="106.6666259765625" text="Quantity in stock" />
-                        <TableColumn fx:id="priceCol" prefWidth="90.9332275390625" text="Price" />
-                    </columns>
-                  </TableView>
+                  <VBox prefHeight="700.0" prefWidth="378.0">
+                     <children>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.6000213623047" minWidth="10.0" prefWidth="142.7333221435547" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.60000610351562" minWidth="10.0" prefWidth="215.2666778564453" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Device:">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name Device:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brand:" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Image Device:" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category:" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Weight:" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:" GridPane.rowIndex="7">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" GridPane.rowIndex="8">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <TextField fx:id="inputID" GridPane.columnIndex="1" />
+                              <TextField fx:id="inputName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="inputBrand" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="inputImg" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="inputCate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="inputWeight" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="inputQuantity" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <TextField fx:id="inputPrice" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacturing Date:" GridPane.rowIndex="6" />
+                              <DatePicker fx:id="inputManufacturing" prefHeight="26.0" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Pane prefHeight="100.0" prefWidth="198.0">
+                                 <children>
+                                    <Button fx:id="reseetBtn" layoutX="35.0" layoutY="28.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Reset" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="100.0" prefWidth="219.0">
+                                 <children>
+                                    <Button fx:id="addBtn" layoutX="45.0" layoutY="27.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" text="Add" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="700.0" prefWidth="857.0">
+                     <children>
+                        <TableView fx:id="stocktable" prefHeight="709.0" prefWidth="820.0">
+                           <columns>
+                              <TableColumn fx:id="idCol" prefWidth="88.26666563749313" text="ID Device" />
+                              <TableColumn fx:id="nameCol" prefWidth="138.13336181640625" text="Name Device" />
+                              <TableColumn fx:id="brandCol" prefWidth="80.53324890136719" text="Brand" />
+                              <TableColumn fx:id="imgCol" prefWidth="163.46673583984375" text="Image Device" />
+                              <TableColumn fx:id="cateCol" prefWidth="92.800048828125" text="Category" />
+                              <TableColumn fx:id="weightCol" prefWidth="80.53338623046875" text="Weight" />
+                              <TableColumn fx:id="qISCol" prefWidth="106.6666259765625" text="Quantity in stock" />
+                              <TableColumn fx:id="priceCol" prefWidth="90.9332275390625" text="Price" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-         </children></HBox>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

@@ -5,14 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ImportProductApp extends Application {
+public class AccountManagement extends Application {
     Scene scene;
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(CreateOrderApp.class.getResource("view/import-product.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CreateOrderApp.class.getResource("view/account-management.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
-        stage.setTitle("Import Product");
+        stage.setTitle("Account Management");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

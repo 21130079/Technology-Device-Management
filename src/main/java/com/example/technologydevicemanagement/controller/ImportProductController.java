@@ -1,12 +1,18 @@
 package com.example.technologydevicemanagement.controller;
 
+import com.example.technologydevicemanagement.SaleManagementApp;
 import com.example.technologydevicemanagement.model.Device;
 import database.DAODevice;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class ImportProductController {
@@ -97,6 +103,25 @@ public class ImportProductController {
                 stocktable.setItems(FXCollections.observableArrayList(daoDevice.getById(inputID.getText())));
             }
         });
+    }
+    public void backToDashboard() {
+        restartApplication();
+    }
+    public void restartApplication() {
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root, 1200, 700);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

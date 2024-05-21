@@ -6,14 +6,13 @@ import java.util.UUID;
 
 public class DBUtil {
    
-    private static String url = "jdbc:mysql://localhost:3306/tdm";
+    private static String url = "jdbc:mysql://localhost:3307/tdm";
     private static String user = "root";
     private static String password = "";
 
     private static Connection connection = null;
 
     public static Connection doConnection(){
-
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, password);
@@ -24,6 +23,9 @@ public class DBUtil {
     }
 
     public static Connection getConnection() {
+        if (connection == null) {
+            return doConnection();
+        }
         return connection;
     }
 
