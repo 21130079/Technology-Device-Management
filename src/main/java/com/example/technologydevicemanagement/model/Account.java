@@ -1,5 +1,8 @@
 package com.example.technologydevicemanagement.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.ArrayList;
 
 public class Account {
@@ -44,6 +47,16 @@ public class Account {
                 ", passwd='" + passwd + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public StringProperty usernameProperty() {
+        return new SimpleStringProperty(username);
+    }
+    public StringProperty passwordProperty() {
+        return new SimpleStringProperty(passwd);
+    }
+    public StringProperty rolesProperty() {
+        return new SimpleStringProperty(roles.toString());
     }
 
 }
