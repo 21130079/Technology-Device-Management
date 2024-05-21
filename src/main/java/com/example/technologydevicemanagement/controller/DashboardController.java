@@ -348,6 +348,7 @@ public class DashboardController implements Initializable {
 
 
 
+
     @FXML
     private void showHistoryOrders() {
         // Hide other forms
@@ -361,6 +362,49 @@ public class DashboardController implements Initializable {
         dashboard_form.setVisible(true);
         historyOrders.setVisible(false);
     }
+    @FXML
+    private void openAccountManagement() {
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(LoginApp.class.getResource("view/account-management.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
+        stage.hide();
+    }
+    @FXML
+    private void openImportProduct() {
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(LoginApp.class.getResource("view/import-product.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
+        stage.hide();
+    }
+
     public void data() {
 
 

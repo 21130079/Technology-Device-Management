@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -167,9 +168,7 @@ public class AccountManagementController {
             statusLabel.setText("Account not found");
         }
     }
-    public void backToDashboard() {
-        // your code here
-    }
+
     @FXML
     private void searchHandle() {
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -189,5 +188,24 @@ public class AccountManagementController {
             }
             stocktable.setItems(accounts);
         });
+    }
+    public void restartApplication() {
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root, 1200, 700);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void backToDashboard() {
+        restartApplication();
     }
 }
