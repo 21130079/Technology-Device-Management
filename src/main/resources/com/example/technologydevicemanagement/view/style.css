@@ -1,3 +1,7 @@
+html {
+    font-family: sans-serif;
+}
+
 #topPane{
     -fx-alignment: right;
     -fx-hgap: 20;
@@ -243,4 +247,28 @@
 
 .button:hover {
     -fx-background-color: #25bcbf;
+}
+
+.login-title {
+    -fx-font-size: 50px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.login-label {
+    -fx-font-size: 25px;
+    -fx-text-fill: #2F80ED;
+}
+
+.login-input {
+    -fx-font-size: 25px;
+    -fx-pref-width: 400px;
+    border-color: #6cb9ff;
+}
+
+.login-btn {
+    -fx-font-size: 25px;
+    -fx-pref-width: 200px;
+    -fx-background-color: white;
+    -fx-text-fill: #6cb9ff;
 }
