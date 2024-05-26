@@ -3,7 +3,6 @@ package com.example.technologydevicemanagement.controller;
 
 
 import com.example.technologydevicemanagement.SaleManagementApp;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
