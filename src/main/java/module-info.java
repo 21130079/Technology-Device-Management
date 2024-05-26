@@ -5,9 +5,12 @@ module com.example.technologydevicemanagement {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
+    requires javafx.swing;
 
     requires java.sql;
     requires mysql.connector.java;
+
+
 
     exports com.example.technologydevicemanagement.controller;
     opens com.example.technologydevicemanagement.controller to javafx.fxml;
