@@ -57,10 +57,10 @@
                                     </styleClass>
                                     <children>
                                         <Button fx:id="dashboard_btn" graphicTextGap="21.0" layoutX="10.0" layoutY="31.0" mnemonicParsing="false" onAction="#showDashboard" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Dashboard" />
-                                        <Button fx:id="avaialbeFD_btn" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#openCreateOrder" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Create Order" />
-                                        <Button layoutX="10.0" layoutY="124.0" mnemonicParsing="false" onAction="#showHistoryOrders" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="History Orders" />
-                              <Button layoutX="10.0" layoutY="171.0" mnemonicParsing="false" onAction="#openAccountManagement" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Account Management" />
-                              <Button layoutX="10.0" layoutY="220.0" mnemonicParsing="false" onAction="#openImportProduct" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Import Product" />
+                                        <Button fx:id="createOrderBtn" layoutX="10.0" layoutY="77.0" mnemonicParsing="false" onAction="#openCreateOrder" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Create Order" />
+                                        <Button fx:id="historyOrderBtn" layoutX="10.0" layoutY="124.0" mnemonicParsing="false" onAction="#showHistoryOrders" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="History Orders" />
+                              <Button fx:id="accountBtn" layoutX="10.0" layoutY="171.0" mnemonicParsing="false" onAction="#openAccountManagement" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Account Management" />
+                              <Button fx:id="importBtn" layoutX="10.0" layoutY="220.0" mnemonicParsing="false" onAction="#openImportProduct" prefHeight="38.0" prefWidth="200.0" stylesheets="@style.css" text="Import Product" />
                                         <Button fx:id="logout" layoutX="10.0" layoutY="443.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="174.0" styleClass="signout" stylesheets="@style.css" text="Log Out" />
                                     </children>
                                 </AnchorPane>
