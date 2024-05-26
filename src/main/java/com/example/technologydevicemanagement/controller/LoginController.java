@@ -1,6 +1,7 @@
 package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.LoginApp;
+import com.example.technologydevicemanagement.model.Account;
 import database.DAOAccount;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-
 
 import java.io.IOException;
 
@@ -43,11 +43,13 @@ public class LoginController {
             return;
         }
         if(!new DAOAccount().checkExits(username,passwd)){
-
             error_lb.setText("username or password is wrong !");
             return;
         }
+        Account loginAccount = new DAOAccount().getByUsername(username);
         Data.username = username;
+        Data.role = loginAccount.getRoles().getFirst();
+
         hideApplication();
         restartApplication();
     }
@@ -63,8 +65,7 @@ public class LoginController {
                 if (event.getCode() == KeyCode.ENTER) {
                     // Xử lý khi phím Enter được nhấn
                     checkLogin();
-                    System.out.println("Enter key pressed in PasswordField");
-                    // Thực hiện các hành động khác ở đây...
+
                 }
             }
 

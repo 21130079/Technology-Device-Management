@@ -99,6 +99,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button year_btn;
 
+    @FXML
+    private Button createOrderBtn, historyOrderBtn, accountBtn, importBtn;
+
     public void displayUsername() {
         String name = Data.username;
         name = name.toUpperCase();
@@ -209,7 +212,7 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(0)))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
         chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(2)))));
         chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(3)))));
@@ -246,7 +249,7 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(0)))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(1)))));
         chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(2)))));
         chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(3)))));
@@ -283,7 +286,7 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(0)))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(1)))));
         chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(2)))));
         chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(3)))));
@@ -292,9 +295,28 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().add(chart);
     }
 
+    public void handleRole(){
+        if(Data.role.equals("Sale staff")){
+            accountBtn.setVisible(false);
+            importBtn.setVisible(false);
+            month_btn.setVisible(false);
+            year_btn.setVisible(false);
+            date_btn.setVisible(false);
+
+        }else if(Data.role.equals("Warehouse staff")){
+            createOrderBtn.setVisible(false);
+            historyOrderBtn.setVisible(false);
+            month_btn.setVisible(false);
+            year_btn.setVisible(false);
+            date_btn.setVisible(false);
+
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      displayUsername();
+        displayUsername();
+        handleRole();
         dashboardNC();
         dashboardTIByDate();
         dashboardTI();

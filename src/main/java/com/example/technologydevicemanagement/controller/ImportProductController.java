@@ -5,14 +5,28 @@ import com.example.technologydevicemanagement.model.Device;
 import database.DAODevice;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
 public class ImportProductController {
     @FXML
@@ -35,92 +49,226 @@ public class ImportProductController {
     private TableColumn<Device, String> brandCol;
 
     @FXML
-    private Button addBtn, reseetBtn;
+    private Button addBtn, resetBtn;
 
     @FXML
-    private TextField inputID, inputName, inputImg, inputWeight, inputCate, inputQuantity, inputPrice, inputBrand;
+    private TextField inputID, inputName, inputWeight, inputCate, inputQuantity, inputPrice, inputBrand;
     @FXML
     private DatePicker inputManufacturing;
-
+    @FXML
+    private ImageView imageView;
+    TextField inputImg = new TextField();
     private DAODevice daoDevice = new DAODevice();
+    private HashMap<String, Image> imageCache = new HashMap<>();
+    private Path imagePath;
+
+    private void centerAlignColumns() {
+        String style = "-fx-alignment: CENTER;";
+        idCol.setStyle(style);
+        nameCol.setStyle(style);
+        imgCol.setStyle(style);
+        weightCol.setStyle(style);
+        cateCol.setStyle(style);
+        qISCol.setStyle(style);
+        priceCol.setStyle(style);
+        brandCol.setStyle(style);
+    }
+
     public void initialize() {
         idCol.setCellValueFactory(cellData -> cellData.getValue().idDeviceProperty());
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameDeviceProperty());
-        imgCol.setCellValueFactory(cellData -> cellData.getValue().urlImgProperty());
+        setImageOnCol(imgCol);
         brandCol.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
         cateCol.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
         weightCol.setCellValueFactory(cellData -> cellData.getValue().weightProperty().asObject());
         qISCol.setCellValueFactory(cellData -> cellData.getValue().quantityInStockProperty().asObject());
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        centerAlignColumns();
 
-        ObservableList<Device> products = FXCollections.observableArrayList();
-        products.addAll(new DAODevice().getAll());
-        stocktable.setItems(products);
+        refreshTable();
 
-        inputID.textProperty().addListener((observable, oldValue, newValue) -> {
-            ObservableList<Device> filteredList = FXCollections.observableArrayList();
-            filteredList.addAll(new DAODevice().getAll());
-            if(newValue.isEmpty() ||  newValue.isBlank()) {
-                stocktable.setItems(filteredList);
-                return;
-            }
+        inputID.textProperty().addListener((observable, oldValue, newValue) -> filterDevices(newValue));
 
-            String keyword = newValue.toLowerCase();
-            filteredList.clear();
-            for (Device device : new DAODevice().getAll()) {
-                if (device.getIdDevice().toLowerCase().contains(keyword)) {
-                    filteredList.add(device);
-                }
-            }
-            stocktable.setItems(filteredList);
-        });
+        resetBtn.setOnAction(event -> resetInputs());
 
-        reseetBtn.setOnAction(event -> {
-            inputID.clear();
-            inputName.clear();
-            inputImg.clear();
-            inputWeight.clear();
-            inputCate.clear();
-            inputQuantity.clear();
-            inputPrice.clear();
-            inputBrand.clear();
-            inputManufacturing.setValue(null);
-        });
-        addBtn.setOnAction(event -> {
-            if (inputID.getText().isEmpty() || inputID.getText().isBlank()) {
-                return;
-            }
-            if(daoDevice.getById(inputID.getText()) == null) {
-                    Device device = new Device(inputID.getText(), inputName.getText(), inputCate.getText(), Double.parseDouble(inputPrice.getText()), inputBrand.getText(), java.sql.Date.valueOf(inputManufacturing.getValue()), Double.parseDouble(inputWeight.getText()), inputImg.getText(), Integer.parseInt(inputQuantity.getText()));
-                    daoDevice.insert(device);
-                    stocktable.setItems(FXCollections.observableArrayList(daoDevice.getById(inputID.getText())));
-            }else{
-                Device device = daoDevice.getById(inputID.getText());
-                int quantityInput = Integer.parseInt(inputQuantity.getText());
-                int quantity = device.getQuantityInStock();
-                daoDevice.decreaseQuantity(device, quantity+quantityInput);
-                stocktable.setItems(FXCollections.observableArrayList(daoDevice.getById(inputID.getText())));
-            }
-        });
+        addBtn.setOnAction(event -> addOrUpdateDevice());
     }
+
+    private void refreshTable() {
+        ObservableList<Device> products = FXCollections.observableArrayList(daoDevice.getAll());
+        stocktable.setItems(products);
+    }
+
+    private void filterDevices(String keyword) {
+        ObservableList<Device> filteredList = FXCollections.observableArrayList(daoDevice.getAll());
+        if (keyword.isEmpty() || keyword.isBlank()) {
+            stocktable.setItems(filteredList);
+            return;
+        }
+        filteredList.clear();
+        keyword = keyword.toLowerCase();
+        for (Device device : daoDevice.getAll()) {
+            if (device.getIdDevice().toLowerCase().contains(keyword)) {
+                filteredList.add(device);
+            }
+        }
+        stocktable.setItems(filteredList);
+    }
+
+    private void resetInputs() {
+        inputID.clear();
+        inputName.clear();
+
+        inputWeight.clear();
+        inputCate.clear();
+        inputQuantity.clear();
+        inputPrice.clear();
+        inputBrand.clear();
+        inputManufacturing.setValue(null);
+        imageView.setImage(null);
+    }
+
+    private void addOrUpdateDevice() {
+        if (inputID.getText().isEmpty() || inputID.getText().isBlank()) {
+            return;
+        }
+
+        try {
+            String id = inputID.getText();
+            String name = inputName.getText();
+            String category = inputCate.getText();
+            double price = Double.parseDouble(inputPrice.getText());
+            String brand = inputBrand.getText();
+            java.sql.Date manufacturingDate = java.sql.Date.valueOf(inputManufacturing.getValue());
+            double weight = Double.parseDouble(inputWeight.getText());
+            String img = inputImg.getText();
+            int quantity = Integer.parseInt(inputQuantity.getText());
+
+            Device device = daoDevice.getById(id);
+
+            if (device == null) {
+                device = new Device(id, name, category, price, brand, manufacturingDate, weight, img, quantity);
+                daoDevice.insert(device);
+            } else {
+                daoDevice.decreaseQuantity(device, device.getQuantityInStock() + quantity);
+            }
+            showInforrAlert(null,"The device imported successfully");
+            refreshTable();
+        } catch (NumberFormatException e) {
+            showErrorAlert("Input Error", "Please enter valid numerical values for price, weight, and quantity.");
+        } catch (Exception e) {
+            showErrorAlert("Error", "An unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    private void showErrorAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    private void showInforrAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     public void backToDashboard() {
         restartApplication();
+        Stage stage = (Stage) stocktable.getScene().getWindow();
+        stage.close();
     }
+
+    private void setImageOnCol(TableColumn<Device, String> imgCol) {
+        imgCol.setCellValueFactory(cellData -> cellData.getValue().urlImgProperty());
+        imgCol.setCellFactory(column -> new TableCell<Device, String>() {
+            private final ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null || item.equals("null")) {
+                    setGraphic(null);
+                } else {
+                    Image cachedImage = imageCache.get(item);
+                    if (cachedImage != null) {
+                        imageView.setImage(cachedImage);
+                    } else {
+                        URL imageUrl = getClass().getResource(item);
+                        if (imageUrl != null) {
+                            try {
+                                imagePath = Paths.get(imageUrl.toURI());
+                                Image image = new Image(imageUrl.toExternalForm());
+                                imageView.setImage(image);
+                                imageCache.put(item, image);
+
+                            } catch (URISyntaxException e) {
+                                System.err.println("Invalid image path URI: " + e.getMessage());
+                                e.printStackTrace();
+                            }
+                        } else {
+                            System.err.println("Cannot load image from URL: " + item);
+                        }
+                    }
+                    imageView.setFitHeight(70);
+                    imageView.setPreserveRatio(true);
+                    setGraphic(imageView);
+                }
+            }
+        });
+    }
+
     public void restartApplication() {
         try {
-            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
             Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
-            // Tạo một Scene mới
             Scene scene = new Scene(root, 1200, 700);
             Stage stage = new Stage();
-            // Đặt scene cho stage
             stage.setScene(scene);
-
-            // Hiển thị stage
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @FXML
+    private void chooseImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg")
+        );
+        File selectedFile = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toString());
+            imageView.setImage(image);
+            saveImage(selectedFile);
+        }
+    }
+
+    @FXML
+    private void saveImage(File selectedFile) {
+        if (selectedFile != null) {
+            try {
+
+                Path parentPath = imagePath.getParent();
+                Image image = imageView.getImage();
+                String imageName = getImageNameFromUrl(image.getUrl());
+                System.out.println(imageName);
+                Path imagePath = parentPath.resolve(imageName);
+                File imageFile = imagePath.toFile();
+                inputImg.setText("/img/devices/"+imageName);
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+                ImageIO.write(bufferedImage, "jpg", imageFile);
+                System.out.println(imageFile+ " bytes");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getImageNameFromUrl(String imageUrl) {
+        String[] parts = imageUrl.split("/");
+        return parts[parts.length - 1];
+    }
 }

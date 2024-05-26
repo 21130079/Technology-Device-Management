@@ -31,10 +31,7 @@ public class AccountManagementController {
     private TableColumn<Account, String> actionsCol;
 
     @FXML
-    private CheckBox adminCheckBox;
-
-    @FXML
-    private CheckBox userCheckBox;
+    private CheckBox adminCheckBox, saleCheckBox, warehouseCheckBox;
 
     @FXML
     private TextField usernameField;
@@ -54,7 +51,8 @@ public class AccountManagementController {
 
     public void initialize() {
         adminCheckBox.setOnAction(event -> handleCheckBox(adminCheckBox));
-        userCheckBox.setOnAction(event -> handleCheckBox(userCheckBox));
+        saleCheckBox.setOnAction(event -> handleCheckBox(saleCheckBox));
+        warehouseCheckBox.setOnAction(event -> handleCheckBox(warehouseCheckBox));
         usernameCol.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
         passwordCol.setCellValueFactory(cellData -> cellData.getValue().passwordProperty());
         roleCol.setCellValueFactory(cellData -> cellData.getValue().rolesProperty());
@@ -204,5 +202,7 @@ public class AccountManagementController {
     }
     public void backToDashboard() {
         restartApplication();
+        Stage stage = (Stage) statusLabel.getScene().getWindow();
+        stage.close();
     }
 }
