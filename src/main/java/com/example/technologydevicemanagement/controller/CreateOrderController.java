@@ -1,9 +1,9 @@
 package com.example.technologydevicemanagement.controller;
 
 
-import com.example.technologydevicemanagement.LoginApp;
+
 import com.example.technologydevicemanagement.SaleManagementApp;
-import javafx.application.Platform;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
@@ -17,6 +17,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -24,7 +27,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
+
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class CreateOrderController {
@@ -66,7 +72,7 @@ public class CreateOrderController {
 
         idCol.setCellValueFactory(cellData -> cellData.getValue().idDeviceProperty());
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameDeviceProperty());
-        imgCol.setCellValueFactory(cellData -> cellData.getValue().urlImgProperty());
+        setImageOnCol(imgCol);
         brandCol.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
         cateCol.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
         weightCol.setCellValueFactory(cellData -> cellData.getValue().weightProperty().asObject());
@@ -75,7 +81,7 @@ public class CreateOrderController {
 
         idBillCol.setCellValueFactory(cellData -> cellData.getValue().idDeviceProperty());
         nameBillCol.setCellValueFactory(cellData -> cellData.getValue().nameDeviceProperty());
-        imgBillCol.setCellValueFactory(cellData -> cellData.getValue().urlImgProperty());
+        setImageOnCol(imgBillCol);
         brandBillCol.setCellValueFactory(cellData -> cellData.getValue().brandProperty());
         cateBillCol.setCellValueFactory(cellData -> cellData.getValue().categoryProperty());
         weightBillCol.setCellValueFactory(cellData -> cellData.getValue().weightProperty().asObject());
@@ -115,23 +121,29 @@ public class CreateOrderController {
                         btn.setOnAction(event -> {
                             Device device = getTableView().getItems().get(getIndex());
                             if (device != null) {
-                                // Xử lý sự kiện khi nút được click
+
                                 System.out.println("Add To Order button clicked for item: " + device.getIdDevice());
-                                // Thêm mã xử lý của bạn ở đây, ví dụ:
-                                // orderItem(device);
+
                                 editBillCol.setCellFactory(param -> new TableCell<Device, Device>() {
                                     final Button btn = new Button("Delete");
 
                                     @Override
-                                    protected void updateItem(Device item, boolean empty) {
-                                        super.updateItem(item, empty);
+                                    protected void updateItem(Device item1, boolean empty) {
+                                        super.updateItem(item1, empty);
                                         if (empty) {
                                             setGraphic(null);
                                         } else {
                                             setGraphic(btn);
                                             btn.setOnAction(actionEvent -> {
                                                 billDevices.remove(getIndex());
+                                                // reset quantity
+                                                System.out.println(device);
+                                                device.setQuantityInStock(device.getQuantityInStock() + device.getQuantity());
+                                                device.setQuantity(1);
+
                                                 billTable.refresh();
+                                                stocktable.refresh();
+
                                             });
                                         }
                                     }
@@ -168,10 +180,49 @@ public class CreateOrderController {
         });
     }
 
+
     public void backToDashboard() {
         restartApplication();
-    }
 
+    }
+    @FXML
+    private HashMap<String, Image> imageCache = new HashMap<>();
+
+    private void setImageOnCol(TableColumn<Device, String> imgCol) {
+        imgCol.setCellValueFactory(cellData -> cellData.getValue().urlImgProperty());
+        imgCol.setCellFactory(column -> {
+            TableCell<Device, String> cell = new TableCell<Device, String>() {
+                private final ImageView imageView = new ImageView();
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null || item.equals("null")) {
+                        setGraphic(null);
+                    } else {
+                        Image cachedImage = imageCache.get(item);
+                        if (cachedImage != null) {
+                            imageView.setImage(cachedImage);
+                        } else {
+                            URL imageUrl = getClass().getResource(item);
+                            if (imageUrl != null) {
+                                Image image = new Image(imageUrl.toExternalForm());
+                                imageView.setImage(image);
+                                imageCache.put(item, image); // Lưu hình ảnh vào cache
+                            } else {
+                                // Xử lý khi không thể tải hình ảnh
+                                System.err.println("Không thể tải hình ảnh từ URL: " + item);
+                            }
+                        }
+                        imageView.setFitHeight(70);
+                        imageView.setPreserveRatio(true);
+                        setGraphic(imageView);
+                    }
+                }
+            };
+            return cell;
+        });
+    }
     public void payment() {
         String id = new DAOOrder().insert();
         System.out.println(id);
@@ -187,6 +238,14 @@ public class CreateOrderController {
         billTable.refresh();
 
         restartApplication();
+        showPaymentSuccessAlert();
+    }
+    private void showPaymentSuccessAlert() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Payment Successful");
+        alert.setHeaderText(null);
+        alert.setContentText("Your payment has been successfully processed.");
+        alert.showAndWait();
     }
 
     public void restartApplication() {
@@ -202,6 +261,7 @@ public class CreateOrderController {
             // Hiển thị stage
             stage.show();
             searchField.getScene().getWindow().hide();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -262,7 +322,9 @@ public class CreateOrderController {
             } else {
 
                 textField.setText(item.toString());
-                setGraphic(new HBox(3, minusButton, textField, addButton));
+                HBox hBox = new HBox(3, minusButton, textField, addButton);
+                hBox.setStyle("-fx-alignment: center");
+                setGraphic(hBox);
 
             }
         }
@@ -279,7 +341,9 @@ public class CreateOrderController {
         public void cancelEdit() {
             super.cancelEdit();
             textField.setText(1 + "");
-            setGraphic(new HBox(3, minusButton, textField, addButton));
+            HBox hBox = new HBox(3, minusButton, textField, addButton);
+            hBox.setStyle("-fx-alignment: center");
+            setGraphic(hBox);
         }
 
         @Override
@@ -292,7 +356,9 @@ public class CreateOrderController {
             getTableRow().getItem().setQuantityInStock(quantityInstock);
             getTableRow().getItem().setQuantity(newValue);
             updateAmount(newValue);
-            setGraphic(new HBox(3, minusButton, textField, addButton));
+            HBox hBox = new HBox(3, minusButton, textField, addButton);
+            hBox.setStyle("-fx-alignment: center");
+            setGraphic(hBox);
             ;
 
         }

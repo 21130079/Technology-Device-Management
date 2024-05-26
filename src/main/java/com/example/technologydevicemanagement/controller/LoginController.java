@@ -64,8 +64,7 @@ public class LoginController {
                 if (event.getCode() == KeyCode.ENTER) {
                     // Xử lý khi phím Enter được nhấn
                     checkLogin();
-                    System.out.println("Enter key pressed in PasswordField");
-                    // Thực hiện các hành động khác ở đây...
+
                 }
             }
 

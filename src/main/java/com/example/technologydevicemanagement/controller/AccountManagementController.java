@@ -207,5 +207,7 @@ public class AccountManagementController {
     }
     public void backToDashboard() {
         restartApplication();
+        Stage stage = (Stage) statusLabel.getScene().getWindow();
+        stage.close();
     }
 }

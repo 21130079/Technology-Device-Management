@@ -209,7 +209,7 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(0)))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
         chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(2)))));
         chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(3)))));
@@ -246,7 +246,7 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(0)))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(1)))));
         chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(2)))));
         chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(3)))));
@@ -283,7 +283,7 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.getFirst(), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.getFirst()))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(0)))));
         chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(1)))));
         chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(2)))));
         chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(3)))));
