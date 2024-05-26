@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class DBUtil {
    
-    private static String url = "jdbc:mysql://localhost:3307/tdm";
+    private static String url = "jdbc:mysql://localhost:3306/tdm";
     private static String user = "root";
     private static String password = "";
 

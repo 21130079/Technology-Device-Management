@@ -37,7 +37,8 @@
                               <VBox>
                                  <children>
                                     <CheckBox fx:id="adminCheckBox" text="Manager" />
-                                    <CheckBox fx:id="userCheckBox" text="Staff" />
+                                    <CheckBox fx:id="saleCheckBox" text="Sale staff" />
+                                    <CheckBox fx:id="warehouseCheckBox" text="Warehouse staff" />
                                  </children>
                               </VBox>
                            </children>

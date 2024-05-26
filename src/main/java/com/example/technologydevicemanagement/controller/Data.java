@@ -4,6 +4,7 @@ import com.example.technologydevicemanagement.model.Order;
 
 public class Data {
     public static String username;
+    public static String role;
     private Order updatedOrder;
     private static Data instance;
 
@@ -13,7 +14,6 @@ public class Data {
         }
         return instance;
     }
-
     public Order getUpdatedOrder() {
         return updatedOrder;
     }
