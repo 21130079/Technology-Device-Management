@@ -1,7 +1,6 @@
 package database;
 
 import com.example.technologydevicemanagement.model.Account;
-import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.util.DBUtil;
 
 import java.sql.*;

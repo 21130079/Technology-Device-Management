@@ -3,7 +3,6 @@ package database;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 import com.example.technologydevicemanagement.util.DBUtil;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.chart.XYChart;
 
 import java.sql.*;

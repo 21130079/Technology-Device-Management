@@ -1,9 +1,7 @@
 package com.example.technologydevicemanagement.controller;
 
 
-import com.example.technologydevicemanagement.LoginApp;
 import com.example.technologydevicemanagement.SaleManagementApp;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
