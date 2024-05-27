@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.LoginApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Account;
 import database.DAOAccount;
 import javafx.event.EventHandler;
@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -78,10 +79,15 @@ public class LoginController {
 
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-                Parent root = FXMLLoader.load(LoginApp.class.getResource("view/dashboard.fxml"));
+                Parent root = FXMLLoader.load(App.class.getResource("view/dashboard.fxml"));
                 // Tạo một Scene mới
                 Scene scene = new Scene(root, 1200, 700);
                 Stage stage = new Stage();
+
+                Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+                stage.setTitle("Technology Equipment Sales Management System");
+                stage.getIcons().add(icon);
                 // Đặt scene cho stage
                 stage.setScene(scene);
 

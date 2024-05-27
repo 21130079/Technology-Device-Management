@@ -230,10 +230,17 @@ html {
 .table-view .column-header {
     -fx-background-color: transparent;
     -fx-size: 40px;
+    -fx-alignment: CENTER;
 }
 
 .table-view .column-header .label {
     -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-font-size: 15px;
+}
+
+.table-view .button {
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-pref-width: 150px;
 }
 
 .container {
@@ -290,6 +297,7 @@ html {
 
 .button:hover {
     -fx-background-color: #25bcbf;
+    -fx-text-fill: #ffffff;
 }
 
 .login-title {

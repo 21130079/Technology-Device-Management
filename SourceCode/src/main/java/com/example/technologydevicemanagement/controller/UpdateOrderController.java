@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.CreateOrderApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 import database.DAOOrder;
@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
@@ -156,12 +157,17 @@ public class UpdateOrderController {
 
     public void showDashBoardView() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("view/dashboard.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
         // Lấy Stage hiện tại từ button
         Stage stage = (Stage) orderid.getScene().getWindow();
+
+        Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+        stage.setTitle("Technology Equipment Sales Management System");
+        stage.getIcons().add(icon);
         // Set giao diện mới
         stage.setScene(scene);
         stage.show();
