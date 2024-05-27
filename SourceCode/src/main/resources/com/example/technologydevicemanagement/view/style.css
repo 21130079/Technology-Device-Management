@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+html {
+    font-family: "Merriweather Sans", sans-serif;
+}
+
+#topPane {
+    -fx-alignment: right;
+    -fx-hgap: 20;
+}
+
+#title {
+    -fx-border-insets: 0, 100, 0, 0;
+}
+
+#orderIdColumn .column-header, #orderIdColumn .table-cell {
+    -fx-pref-width: 130px;
+}
+
+#productListColumn .column-header, #productListColumn .table-cell {
+    -fx-pref-width: 555px;
+}
+
+#paymentDateColumn .column-header, #paymentDateColumn .table-cell {
+    -fx-pref-width: 200px;
+}
+
+#totalAmountColumn .column-header, #totalAmountColumn .table-cell {
+    -fx-pref-width: 180px;
+}
+
+#actionColumn .column-header, #actionColumn .table-cell {
+    -fx-pref-width: 130px;
+}
+
+.top-form {
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
+    -fx-border-width: .4px .4px .2px .4px;
+}
+
+.semi-top {
+    -fx-background-color: #efefef;
+    -fx-border-color: #000;
+    -fx-border-width: .2px .4px .4px .4px;
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #ee5363;
+}
+
+.minimize {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.minimize:hover {
+    -fx-background-color: #ddd;
+}
+
+.nav1 {
+    -fx-background-color: linear-gradient(to top right, #3ac1e1, #00ecbe);
+    -fx-background-radius: 5px;
+}
+
+.nav2 {
+    -fx-background-color: linear-gradient(to top right, #3ac1e1, #00ecbe);
+    -fx-background-radius: 5px;
+}
+
+.left-btn {
+    -fx-background-color: white;
+}
+
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 8, 0, 0, 0);
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-cursor: hand;
+    -fx-text-fill: #000;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #3796a7;
+    -fx-text-fill: #fff;
+    -fx-border-width: 0px;
+}
+
+.signout {
+    -fx-background-color: #3796a7;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.signout:hover {
+    -fx-background-color: #25bcbf;
+}
+
+.white-bg {
+    -fx-background-color: #e3f5f5;
+    -fx-background-radius: 6px;
+}
+
+.chart-bg {
+    -fx-background-color: white;
+    -fx-background-radius: 6px;
+}
+
+.card-1 {
+    -fx-background-color: #3ebee5;
+    -fx-background-radius: 10px;
+}
+
+.card-2 {
+    -fx-background-color: #3ab8b7;
+    -fx-background-radius: 10px;
+}
+
+.card-3 {
+    -fx-background-color: #00ecbe;
+    -fx-background-radius: 10px;
+}
+
+
+.textfield {
+    -fx-background-color: #eee;
+    -fx-font-family: Tahoma;
+    -fx-border-color: #25bcbf;
+    -fx-border-width: .5px;
+}
+
+.textfield:focused {
+    -fx-border-width: 1.5px;
+    -fx-background-color: #f5f5f5;
+}
+
+.add-btn {
+    -fx-background-color: #3a6690;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+
+.add-btn:hover {
+    -fx-background-color: #3982c5;
+}
+
+.update-btn {
+    -fx-background-color: #398c5e;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+
+.update-btn:hover {
+    -fx-background-color: #30a761;
+}
+
+.clear-btn {
+    -fx-background-color: #873a8e;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+
+.clear-btn:hover {
+    -fx-background-color: #a432ae;
+}
+
+.delete-btn {
+    -fx-background-color: #9a3641;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+}
+
+.delete-btn:hover {
+    -fx-background-color: #b12d3c;
+}
+
+.search {
+    -fx-background-color: #f5f5f5;
+    -fx-border-width: 1.2px;
+    -fx-border-radius: 6px;
+    -fx-border-color: #3796a7;
+    -fx-font-size: 13px;
+    -fx-padding: 0px 0px 0px 28px;
+}
+
+.search:focused {
+    -fx-background-color: #fff;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right, #25bcbf, #3796a7);
+    -fx-border-radius: 8px;
+    -fx-border-width: 2px;
+    -fx-padding: 0px;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom right, #25bcbf, #3796a7);
+    -fx-background-radius: 8px 8px 0px 0px;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-size: 40px;
+    -fx-alignment: CENTER;
+}
+
+.table-view .column-header .label {
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-font-size: 15px;
+}
+
+.table-view .button {
+    -fx-font-family: "Merriweather Sans", sans-serif;
+    -fx-pref-width: 150px;
+}
+
+.container {
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+}
+
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-font-size: 14px;
+    -fx-pref-width: 200px;
+}
+
+.status {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ff0000; /* Màu đỏ */
+}
+
+.main-background {
+    -fx-background-color: #d3f4e9;
+}
+
+.button {
+    -fx-font-size: 15px;
+    -fx-pref-width: 180px;
+    -fx-background-color: #d3f4e9;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: pointer;
+    -fx-font-weight: bold;
+}
+
+.revenue-button {
+    -fx-font-size: 16px;
+    -fx-pref-width: 97px;
+    -fx-background-color: #d3f4e9;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: pointer;
+}
+
+.button:hover {
+    -fx-background-color: #25bcbf;
+    -fx-text-fill: #ffffff;
+}
+
+.login-title {
+    -fx-font-size: 50px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.login-label {
+    -fx-font-size: 25px;
+    -fx-text-fill: #2F80ED;
+}
+
+.login-input {
+    -fx-font-size: 25px;
+    -fx-pref-width: 400px;
+    border-color: #6cb9ff;
+}
+
+.login-btn {
+    -fx-font-size: 25px;
+    -fx-pref-width: 200px;
+    -fx-background-color: white;
+    -fx-text-fill: #6cb9ff;
+}
