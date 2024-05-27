@@ -57,6 +57,7 @@ public class LoginController {
     public void initialize() {
         LoginByKey();
     }
+    @FXML
     public void LoginByKey(){
         password_f.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
             @Override
