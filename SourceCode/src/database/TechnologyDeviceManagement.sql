@@ -30,17 +30,15 @@ CREATE TABLE OrderDevices
 );
 
 create table accounts (
-
-			username varchar(255) PRIMARY KEY,
-			passwd  varchar(20) NOT null
-
+		username varchar(255) PRIMARY KEY,
+		passwd  varchar(20) NOT null
 );
 
 create table roles_account(
-                              username varchar(255),
-                              role NVARCHAR(50),
-                              FOREIGN KEY (username) REFERENCES accounts(username),
-                              PRIMARY KEY(username,role)
+		username varchar(255),
+		role NVARCHAR(50),
+		FOREIGN KEY (username) REFERENCES accounts(username),
+		PRIMARY KEY(username,role)
 );
 
 CREATE TRIGGER generate_idDevice_trigger
@@ -116,9 +114,11 @@ VALUES ('1', '2024-04-01'),
 INSERT INTO OrderDevices (idOrder, idDevice)
 VALUES ('1', 'ace017' ), ('1', 'ace017'), ('2', 'bea025'), ('2', 'bea025'), ('2', 'bea025');
 
-
 insert into accounts(username,passwd)
 values ('admin','admin');
+
+insert into roles_account(username, role)
+values ('admin', 'admin');
 
 
 
