@@ -321,18 +321,6 @@
                                                 </AnchorPane>
                                             </children>
                                         </AnchorPane>
-                                        <AnchorPane fx:id="availableFD_form" prefHeight="555.0" prefWidth="887.0"
-                                                    visible="false">
-                                            <children>
-                                                <!-- Components for availableFD_form -->
-                                            </children>
-                                        </AnchorPane>
-                                        <AnchorPane fx:id="addProducts_form" prefHeight="555.0" prefWidth="887.0"
-                                                    visible="false">
-                                            <children>
-                                                <!-- Components for addProducts_form -->
-                                            </children>
-                                        </AnchorPane>
                                         <AnchorPane fx:id="historyOrders" prefHeight="622.0" prefWidth="881.0"
                                                     visible="false">
                                             <children>
@@ -341,14 +329,14 @@
                                                     <columns>
                                                         <TableColumn fx:id="orderIdColumn" prefWidth="120"
                                                                      text="Code Orders"/>
-                                                        <TableColumn fx:id="productListColumn" prefWidth="430"
+                                                        <TableColumn fx:id="productListColumn" prefWidth="230"
                                                                      text="List Of Products"/>
-                                                        <TableColumn fx:id="paymentDateColumn" prefWidth="100"
-                                                                     text="Date Of Payment"/>
-                                                        <TableColumn fx:id="amountColumn" prefWidth="150"
+                                                        <TableColumn fx:id="paymentDateColumn" prefWidth="120"
+                                                                     text="Date Created"/>
+                                                        <TableColumn fx:id="amountColumn" prefWidth="100"
                                                                      text="Amount"/>
 
-                                                        <TableColumn fx:id="featuresColumn" prefWidth="120" text=""/>
+                                                        <TableColumn fx:id="featuresColumn" prefWidth="350" text=""/>
                                                     </columns>
                                                 </TableView>
                                             </children>

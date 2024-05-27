@@ -1,7 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.CreateOrderApp;
-import com.example.technologydevicemanagement.LoginApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 import database.DAOOrder;
@@ -10,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -118,7 +119,7 @@ public class DashboardController implements Initializable {
 
             if (option.get().equals(ButtonType.OK)) {
                 logout.getScene().getWindow().hide();
-                FXMLLoader loader = new FXMLLoader(LoginApp.class.getResource("view/login.fxml"));
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("view/login.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -197,7 +198,6 @@ public class DashboardController implements Initializable {
         sqlDates.add(currentDate);
 
 
-
         // Lấy ra 5 ngày gần nhất
         for (int i = 0; i < 4; i++) {
             long oneDayInMillis = 24 * 60 * 60 * 1000; // 1 ngày tính bằng milliseconds
@@ -232,7 +232,6 @@ public class DashboardController implements Initializable {
 
         dates.add(formattedDate);
         sqlDates.add(currentDate);
-
 
 
         // Lấy ra 5 tháng gần nhất
@@ -271,7 +270,6 @@ public class DashboardController implements Initializable {
         sqlDates.add(currentDate);
 
 
-
         // Lấy ra 5 năm gần nhất
         for (int i = 0; i < 4; i++) {
             long oneYearInMillis = 24 * 60 * 60 * 1000 * 30 * 12; // 1 năm tính bằng milliseconds
@@ -295,15 +293,15 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().add(chart);
     }
 
-    public void handleRole(){
-        if(Data.role.equals("Sale staff")){
+    public void handleRole() {
+        if (Data.role.equals("Sale staff")) {
             accountBtn.setVisible(false);
             importBtn.setVisible(false);
             month_btn.setVisible(false);
             year_btn.setVisible(false);
             date_btn.setVisible(false);
 
-        }else if(Data.role.equals("Warehouse staff")){
+        } else if (Data.role.equals("Warehouse staff")) {
             createOrderBtn.setVisible(false);
             historyOrderBtn.setVisible(false);
             month_btn.setVisible(false);
@@ -327,33 +325,42 @@ public class DashboardController implements Initializable {
 
     public void openCreateOrder() {
 
-            try {
-                // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-                Parent root = FXMLLoader.load(LoginApp.class.getResource("view/create-order.fxml"));
-                // Tạo một Scene mới
-                Scene scene = new Scene(root, 1200, 700);
-                Stage stage = new Stage();
-                // Đặt scene cho stage
-                stage.setScene(scene);
+        try {
+            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+            Parent root = FXMLLoader.load(App.class.getResource("view/create-order.fxml"));
+            // Tạo một Scene mới
+            Scene scene = new Scene(root, 1200, 700);
+            Stage stage = new Stage();
+            // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
 
-                // Hiển thị stage
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Stage stage = (Stage) dashboard_TI.getScene().getWindow();
         stage.hide();
     }
+
     public void openUpdateOrder() {
 
         try {
             // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(LoginApp.class.getResource("view/update-order.fxml"));
+            Parent root = FXMLLoader.load(App.class.getResource("view/update-order.fxml"));
             // Tạo một Scene mới
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
             stage.setScene(scene);
 
             // Hiển thị stage
@@ -367,8 +374,6 @@ public class DashboardController implements Initializable {
         stage.hide();
 
     }
-
-
 
 
     @FXML
@@ -379,20 +384,26 @@ public class DashboardController implements Initializable {
         // Show history orders
         historyOrders.setVisible(true);
     }
+
     @FXML
-    private void showDashboard(){
+    private void showDashboard() {
         dashboard_form.setVisible(true);
         historyOrders.setVisible(false);
     }
+
     @FXML
     private void openAccountManagement() {
         try {
             // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(LoginApp.class.getResource("view/account-management.fxml"));
+            Parent root = FXMLLoader.load(App.class.getResource("view/account-management.fxml"));
             // Tạo một Scene mới
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
             stage.setScene(scene);
 
             // Hiển thị stage
@@ -405,15 +416,20 @@ public class DashboardController implements Initializable {
         Stage stage = (Stage) dashboard_TI.getScene().getWindow();
         stage.hide();
     }
+
     @FXML
     private void openImportProduct() {
         try {
             // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(LoginApp.class.getResource("view/import-product.fxml"));
+            Parent root = FXMLLoader.load(App.class.getResource("view/import-product.fxml"));
             // Tạo một Scene mới
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
             stage.setScene(scene);
 
             // Hiển thị stage
@@ -442,48 +458,37 @@ public class DashboardController implements Initializable {
         productListColumn.setCellValueFactory(cellData -> cellData.getValue().productListProperty());
         paymentDateColumn.setCellValueFactory(cellData -> cellData.getValue().invoiceDateProperty());
         amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
-//        Image upimg = new Image(DashboardController.class.getResourceAsStream("../resources/img/edit.png"));
-//        ImageView iconUpdate = new ImageView(upimg);
-//        iconUpdate.setFitWidth(16);
-//        iconUpdate.setFitHeight(16);
-//        ImageView iconDelete = new ImageView(new Image(getClass().getResourceAsStream("../resources/img/edit.png")));
-//        iconDelete.setFitWidth(16);
-//        iconDelete.setFitHeight(16);
 
 
         featuresColumn.setCellFactory(param -> new TableCell<Order, Order>() {
-
             final Button btnUpdate = new Button("Update");
-
             final Button btnDelete = new Button("Delete");
             final HBox buttonsBox = new HBox(btnUpdate, btnDelete);
 
-//                btnUpdate.setGraphic(iconUpdate);
-//                btnDelete.setGraphic(iconDelete);
-                {
-                    // Thiết lập hành động cho nút Update
-                    btnUpdate.setOnAction(event -> {
-                        Order order = getTableView().getItems().get(getIndex());
-                        updateOrder(order);
-                    });
+            {
+                // Thiết lập hành động cho nút Update
+                btnUpdate.setOnAction(event -> {
+                    Order order = getTableView().getItems().get(getIndex());
+                    updateOrder(order);
+                });
 
-                    // Thiết lập hành động cho nút Delete
-                    btnDelete.setOnAction(event -> {
-                        Order order = getTableView().getItems().get(getIndex());
+                // Thiết lập hành động cho nút Delete
+                btnDelete.setOnAction(event -> {
+                    Order order = getTableView().getItems().get(getIndex());
 
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Confirm Delete");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Are you sure you want to delete order?");
-                        Optional<ButtonType> option = alert.showAndWait();
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirm Delete");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Are you sure you want to delete order?");
+                    Optional<ButtonType> option = alert.showAndWait();
 
-                        if (option.get().equals(ButtonType.OK)) {
-                            deleteOrder(order);
-                        }
-                    });
-                    buttonsBox.setStyle("-fx-alignment: CENTER;");
+                    if (option.get().equals(ButtonType.OK)) {
+                        deleteOrder(order);
+                    }
+                });
 
-                }
+                buttonsBox.setAlignment(Pos.CENTER);
+            }
 
 
             @Override
@@ -520,7 +525,6 @@ public class DashboardController implements Initializable {
     }
 
 
-
     @FXML
     private void getdata() {
         ObservableList<Order> orders = FXCollections.observableArrayList();
@@ -530,12 +534,17 @@ public class DashboardController implements Initializable {
 
     public void showCreateOrderView(javafx.event.ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("view/create-order.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
         // Lấy Stage hiện tại từ button
         Stage stage = new Stage();
+
+        Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+        stage.setTitle("Technology Equipment Sales Management System");
+        stage.getIcons().add(icon);
         // Set giao diện mới
         stage.setScene(scene);
         stage.show();
