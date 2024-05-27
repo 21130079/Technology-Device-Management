@@ -34,6 +34,20 @@ public class Device {
             this.quantity=1;
         }
 
+        public Device(String nameProduct, String category, double price, String brand, Date manufacturingDate, double weight, String urlImg, int quantityInStock) {
+            this.nameDevice = nameProduct;
+            this.category = category;
+            this.price = price;
+            this.brand = brand;
+            this.manufacturingDate = manufacturingDate;
+            this.weight = weight;
+            this.urlImg = urlImg;
+            this.quantityInStock = quantityInStock;
+            this.amount=price;
+        }
+
+
+
     @Override
     public String toString() {
         return "Device{" +
