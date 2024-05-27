@@ -230,7 +230,7 @@ public class CreateOrderController {
         for (Device device : billDevices) {
             for (int i = 0; i < device.getQuantity(); i++) {
                 daoOrderDevices.insert(device, id);
-                daoDevice.decreaseQuantity(device, device.getQuantityInStock());
+                daoDevice.updateQuantity(device, device.getQuantityInStock());
             }
         }
         billDevices.clear();

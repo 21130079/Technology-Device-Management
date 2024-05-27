@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZoneId;
 import java.util.HashMap;
 
 public class ImportProductController {
@@ -49,7 +50,7 @@ public class ImportProductController {
     private TableColumn<Device, String> brandCol;
 
     @FXML
-    private Button addBtn, resetBtn;
+    private Button addBtn, resetBtn, addNewBtn, updateBtn, chooseImgBtn;
 
     @FXML
     private TextField inputID, inputName, inputWeight, inputCate, inputQuantity, inputPrice, inputBrand;
@@ -75,6 +76,8 @@ public class ImportProductController {
     }
 
     public void initialize() {
+        addNewBtn.setOnAction(event -> selectAddNewBtn());
+        updateBtn.setOnAction(event -> selectUpdateBtn());
         idCol.setCellValueFactory(cellData -> cellData.getValue().idDeviceProperty());
         nameCol.setCellValueFactory(cellData -> cellData.getValue().nameDeviceProperty());
         setImageOnCol(imgCol);
@@ -92,6 +95,37 @@ public class ImportProductController {
         resetBtn.setOnAction(event -> resetInputs());
 
         addBtn.setOnAction(event -> addOrUpdateDevice());
+    }
+
+    private void selectAddNewBtn(){
+        inputID.clear();
+        inputID.setDisable(true);
+        inputName.setDisable(false);
+        inputWeight.setDisable(false);
+        inputCate.setDisable(false);
+        inputQuantity.setDisable(false);
+        inputPrice.setDisable(false);
+        inputBrand.setDisable(false);
+        inputManufacturing.setDisable(false);
+        imageView.setDisable(false);
+        chooseImgBtn.setDisable(false);
+        addBtn.setDisable(false);
+        resetBtn.setDisable(false);
+    }
+
+    private void selectUpdateBtn(){
+        inputID.setDisable(false);
+        inputName.setDisable(false);
+        inputWeight.setDisable(false);
+        inputCate.setDisable(false);
+        inputQuantity.setDisable(false);
+        inputPrice.setDisable(false);
+        inputBrand.setDisable(false);
+        inputManufacturing.setDisable(false);
+        imageView.setDisable(false);
+        chooseImgBtn.setDisable(false);
+        addBtn.setDisable(false);
+        resetBtn.setDisable(false);
     }
 
     private void refreshTable() {
@@ -112,13 +146,30 @@ public class ImportProductController {
                 filteredList.add(device);
             }
         }
+
         stocktable.setItems(filteredList);
+        if(filteredList.size()==1){
+            Device device = filteredList.get(0);
+            inputID.setText(device.getIdDevice());
+            inputID.setEditable(true);
+            inputName.setText(device.getNameDevice());
+            inputWeight.setText(String.valueOf(device.getWeight()));
+            inputCate.setText(device.getCategory());
+            inputQuantity.setText(String.valueOf(device.getQuantityInStock()));
+            inputPrice.setText(String.valueOf(device.getPrice()));
+            inputBrand.setText(device.getBrand());
+            java.util.Date utilDate = new java.util.Date(device.getManufacturingDate().getTime());
+            inputManufacturing.setValue(utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            inputImg.setText(device.getUrlImg());
+            Image image = new Image(getClass().getResource(device.getUrlImg()).toExternalForm());
+            imageView.setImage(image);
+
+        }
     }
 
     private void resetInputs() {
         inputID.clear();
         inputName.clear();
-
         inputWeight.clear();
         inputCate.clear();
         inputQuantity.clear();
@@ -129,10 +180,6 @@ public class ImportProductController {
     }
 
     private void addOrUpdateDevice() {
-        if (inputID.getText().isEmpty() || inputID.getText().isBlank()) {
-            return;
-        }
-
         try {
             String id = inputID.getText();
             String name = inputName.getText();
@@ -147,13 +194,16 @@ public class ImportProductController {
             Device device = daoDevice.getById(id);
 
             if (device == null) {
-                device = new Device(id, name, category, price, brand, manufacturingDate, weight, img, quantity);
+                device = new Device(name, category, price, brand, manufacturingDate, weight, img, quantity);
                 daoDevice.insert(device);
+                showInforrAlert(null,"The device imported successfully");
             } else {
-                daoDevice.decreaseQuantity(device, device.getQuantityInStock() + quantity);
+                Device updateDevice = new Device(id, name, category, price, brand, manufacturingDate, weight, img, quantity);
+                daoDevice.update(updateDevice);
+                showInforrAlert(null,"The device updated successfully");
             }
-            showInforrAlert(null,"The device imported successfully");
-            refreshTable();
+
+
         } catch (NumberFormatException e) {
             showErrorAlert("Input Error", "Please enter valid numerical values for price, weight, and quantity.");
         } catch (Exception e) {
@@ -275,5 +325,14 @@ public class ImportProductController {
     private String getImageNameFromUrl(String imageUrl) {
         String[] parts = imageUrl.split("/");
         return parts[parts.length - 1];
+    }
+
+    private int findDeviceIndex(Device device) {
+        for (int i = 0; i < stocktable.getItems().size(); i++) {
+            if (stocktable.getItems().get(i).getIdDevice().equals(device.getIdDevice())) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

@@ -13,7 +13,7 @@ import java.sql.Date;
 public class DAODevice {
     Connection connection = DBUtil.getConnection();
 
-    public void insert(Device device) {
+    public int insert(Device device) {
         try {
             PreparedStatement stm = connection.prepareStatement("insert into devices(idDevice,nameDevice,category,price,brand,manufacturingDate,weight,urlImg,quantityInStock) values(?,?,?,?,?,?,?,?,?)");
             stm.setString(1, device.getIdDevice());
@@ -26,9 +26,12 @@ public class DAODevice {
             stm.setString(8, device.getUrlImg());
             stm.setInt(9, device.getQuantityInStock());
             stm.executeUpdate();
+            return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
+
     }
 
     public ArrayList<Device> getAll() {
@@ -87,7 +90,25 @@ public class DAODevice {
         return null;
     }
 
-    public int decreaseQuantity(Device device, int quantity) {
+    public void update(Device device){
+        try {
+            PreparedStatement stm = connection.prepareStatement("update devices set nameDevice = ?, category = ?, price = ?, brand = ?, manufacturingDate = ?, weight = ?, urlImg = ?, quantityInStock = ? where idDevice = ?");
+            stm.setString(1, device.getNameDevice());
+            stm.setString(2, device.getCategory());
+            stm.setDouble(3, device.getPrice());
+            stm.setString(4, device.getBrand());
+            stm.setDate(5, new Date(device.getManufacturingDate().getTime()));
+            stm.setDouble(6, device.getWeight());
+            stm.setString(7, device.getUrlImg());
+            stm.setInt(8, device.getQuantityInStock());
+            stm.setString(9, device.getIdDevice());
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int updateQuantity(Device device, int quantity) {
         try {
             PreparedStatement stm = connection.prepareStatement("update devices set quantityInStock = ? where idDevice =?");
             stm.setInt(1, quantity);
