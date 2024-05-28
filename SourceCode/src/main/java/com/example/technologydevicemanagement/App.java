@@ -15,7 +15,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        DBUtil.doConnection();
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/login.fxml"));
         Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
         stage.setTitle("Technology Equipment Sales Management System");
