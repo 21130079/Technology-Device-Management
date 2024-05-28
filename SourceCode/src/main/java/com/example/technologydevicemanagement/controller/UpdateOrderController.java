@@ -3,8 +3,8 @@ package com.example.technologydevicemanagement.controller;
 import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
-import database.DAOOrder;
-import database.DAOOrderDevices;
+
+
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +17,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+import service.OrderDevicesService;
+import service.OrderService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -141,10 +143,10 @@ public class UpdateOrderController {
             String id = orderid.getText();
             Date date = Date.valueOf(dateT.getValue());
             Order order = new Order(id, productList, date);
-            new DAOOrder().update(order);
+            new OrderService().updateData(order);
             ArrayList<Device> devices = new ArrayList<>();
             devices.addAll(products);
-            new DAOOrderDevices().update(productList, id);
+            new OrderDevicesService().updateDevicesInOrder(productList, id);
 
             close();
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

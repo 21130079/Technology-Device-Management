@@ -25,7 +25,7 @@ public class DAOOrderDevices {
 
     }
 
-    private void delete(String orderId) throws SQLException {
+    public void delete(String orderId) throws SQLException {
         PreparedStatement stm = connection.prepareStatement("DELETE FROM OrderDevices WHERE idOrder = ?");
         stm.setString(1, orderId);
         stm.executeUpdate();
@@ -64,8 +64,6 @@ public class DAOOrderDevices {
             ResultSet resultSet = stm.executeQuery();
             while (resultSet.next()) {
                 String idDevice = resultSet.getString("idDevice");
-                Device device = new DAODevice().getById(idDevice);
-
                 if (devices.containsKey(idDevice)) {
                     devices.put(idDevice, devices.get(idDevice) + 1);
                 } else {
@@ -78,7 +76,6 @@ public class DAOOrderDevices {
 
         return devices;
     }
-
     public LinkedHashMap<Device, Integer> getListDevice(String idOrder) {
         DAODevice daoDevice = new DAODevice();
         LinkedHashMap<Device, Integer> result = new LinkedHashMap<Device, Integer>();
@@ -86,9 +83,10 @@ public class DAOOrderDevices {
             String key = entry.getKey();
             Integer value = entry.getValue();
             result.put(daoDevice.getById(key), value);
-            // Thực hiện các thao tác bạn cần với key và value ở đây
+
         }
 
         return result;
     }
+
 }
