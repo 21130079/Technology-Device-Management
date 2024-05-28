@@ -1,6 +1,7 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.App;
+import com.example.technologydevicemanagement.view.CreateOrderApp;
+import com.example.technologydevicemanagement.view.LoginApp;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 
@@ -325,15 +326,15 @@ public class DashboardController implements Initializable {
     }
 
     public void openCreateOrder() {
-
-        try {
-            // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(App.class.getResource("view/create-order.fxml"));
-            // Tạo một Scene mới
-            Scene scene = new Scene(root, 1200, 700);
-            Stage stage = new Stage();
-            // Đặt scene cho stage
-            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+            try {
+                // Tạo một FXMLLoader mới để tải lại cùng một fxml file
+                Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/create-order.fxml"));
+                // Tạo một Scene mới
+                Scene scene = new Scene(root, 1200, 700);
+                Stage stage = new Stage();
+                stage.setTitle("Create Order");
+                // Đặt scene cho stage
+                stage.setScene(scene);
 
             stage.setTitle("Technology Equipment Sales Management System");
             stage.getIcons().add(icon);
@@ -353,10 +354,11 @@ public class DashboardController implements Initializable {
 
         try {
             // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(App.class.getResource("view/update-order.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/update-order.fxml"));
             // Tạo một Scene mới
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+            stage.setTitle("Update Order");
             // Đặt scene cho stage
             Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
 
@@ -396,10 +398,11 @@ public class DashboardController implements Initializable {
     private void openAccountManagement() {
         try {
             // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(App.class.getResource("view/account-management.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/account-management.fxml"));
             // Tạo một Scene mới
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+            stage.setTitle("Account Management");
             // Đặt scene cho stage
             Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
 
@@ -422,10 +425,11 @@ public class DashboardController implements Initializable {
     private void openImportProduct() {
         try {
             // Tạo một FXMLLoader mới để tải lại cùng một fxml file
-            Parent root = FXMLLoader.load(App.class.getResource("view/import-product.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/import-product.fxml"));
             // Tạo một Scene mới
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+            stage.setTitle("Import Product");
             // Đặt scene cho stage
             Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
 
