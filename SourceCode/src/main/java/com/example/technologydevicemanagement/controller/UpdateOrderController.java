@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.CreateOrderApp;
+import com.example.technologydevicemanagement.view.CreateOrderApp;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 import database.DAOOrder;
@@ -156,14 +156,14 @@ public class UpdateOrderController {
 
     public void showDashBoardView() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/dashboard.fxml"));
-        Parent root = loader.load();
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/dashboard.fxml"));
         Scene scene = new Scene(root);
 
         // Lấy Stage hiện tại từ button
         Stage stage = (Stage) orderid.getScene().getWindow();
         // Set giao diện mới
         stage.setScene(scene);
+        stage.setTitle("Technology Equipment Sales Management System");
         stage.show();
     }
 

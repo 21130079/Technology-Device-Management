@@ -1,4 +1,4 @@
-package com.example.technologydevicemanagement;
+package com.example.technologydevicemanagement.view;
 
 import javafx.application.Application;
 
@@ -13,7 +13,7 @@ public class SaleManagementApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/update-order.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/update-order.fxml"));
         Scene scene = new Scene(root, 1200, 700);
         primaryStage.setScene(scene);
         primaryStage.setTitle("JavaFX Application");

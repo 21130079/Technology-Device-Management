@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.SaleManagementApp;
+import com.example.technologydevicemanagement.view.SaleManagementApp;
 import com.example.technologydevicemanagement.model.Device;
 import database.DAODevice;
 import javafx.collections.FXCollections;
@@ -271,9 +271,10 @@ public class ImportProductController {
 
     public void restartApplication() {
         try {
-            Parent root = FXMLLoader.load(SaleManagementApp.class.getResource("view/dashboard.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/dashboard.fxml"));
             Scene scene = new Scene(root, 1200, 700);
             Stage stage = new Stage();
+            stage.setTitle("Technology Equipment Sales Management System");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
