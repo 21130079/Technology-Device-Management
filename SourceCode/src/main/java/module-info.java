@@ -16,6 +16,4 @@ module com.example.technologydevicemanagement {
     opens com.example.technologydevicemanagement.controller to javafx.fxml;
     exports com.example.technologydevicemanagement;
     opens com.example.technologydevicemanagement to javafx.fxml;
-    exports com.example.technologydevicemanagement.view;
-    opens com.example.technologydevicemanagement.view to javafx.fxml;
 }
