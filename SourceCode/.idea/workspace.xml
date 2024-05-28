@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="475b9f4e-e7e4-4137-9ca7-5f0d233063ae" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/view/AccountManagementApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/view/CreateOrderApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/view/DashboardApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/view/ImportProductApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/view/LoginApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/view/SaleManagementApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql/tdm.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql/tdm.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/dao/DAOOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/dao/DAOOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/technologydevicemanagement/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/technologydevicemanagement/view/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/technologydevicemanagement/view/dashboard.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +35,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.App.executor": "Run",
+    "Application.DAOOrder.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -80,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1716909612647</updated>
       <workItem from="1716909616524" duration="329000" />
-      <workItem from="1716909957221" duration="260000" />
+      <workItem from="1716909957221" duration="5245000" />
     </task>
     <servers />
   </component>

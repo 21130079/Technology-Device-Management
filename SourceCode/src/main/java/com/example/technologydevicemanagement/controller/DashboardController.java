@@ -189,109 +189,45 @@ public class DashboardController implements Initializable {
     }
 
     public void dashboardICChartByDate() {
-        Date date = new Date();
-        long currentDate = date.getTime();
-        ArrayList<Long> sqlDates = new ArrayList<>();
-        ArrayList<String> dates = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = dateFormat.format(currentDate);
-
-        dates.add(formattedDate);
-        sqlDates.add(currentDate);
-
-
-        // Lấy ra 5 ngày gần nhất
-        for (int i = 0; i < 4; i++) {
-            long oneDayInMillis = 24 * 60 * 60 * 1000; // 1 ngày tính bằng milliseconds
-            Date recentDate = new Date(date.getTime() - (i + 1) * oneDayInMillis);
-            sqlDates.add(recentDate.getTime());
-
-            String formattedRecentDate = dateFormat.format(recentDate);
-            dates.add(formattedRecentDate);
-        }
-
+        ArrayList<java.sql.Date> dates = new OrderService().setICChartByDate();
 
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.get(0), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(0)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(1), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(2), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(2)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(3), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(3)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(4), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(4)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0).toString(), new OrderService().getTIByDate(dates.get(0))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1).toString(), new OrderService().getTIByDate(dates.get(1))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2).toString(), new OrderService().getTIByDate(dates.get(2))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3).toString(), new OrderService().getTIByDate(dates.get(3))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4).toString(), new OrderService().getTIByDate(dates.get(4))));
 
         dashboard_ICChart.getData().add(chart);
     }
 
     public void dashboardICChartByMonth() {
-        Date date = new Date();
-        long currentDate = date.getTime();
-        ArrayList<Long> sqlDates = new ArrayList<>();
-        ArrayList<String> dates = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = dateFormat.format(currentDate);
-
-        dates.add(formattedDate);
-        sqlDates.add(currentDate);
-
-
-        // Lấy ra 5 tháng gần nhất
-        for (int i = 0; i < 4; i++) {
-            long oneMonthInMillis = 24 * 60 * 60 * 1000 * 30; // 1 tháng tính bằng milliseconds
-            Date recentMonth = new Date(date.getTime() - (i + 1) * oneMonthInMillis);
-            sqlDates.add(recentMonth.getTime());
-
-            String formattedRecentMonth = dateFormat.format(recentMonth);
-            dates.add(formattedRecentMonth);
-        }
-
+        ArrayList<java.sql.Date> dates = new OrderService().setICChartByMonth();
 
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.get(0), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(0)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(1), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(1)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(2), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(2)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(3), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(3)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(4), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(4)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0).toString(), new OrderService().getTIByMonth(dates.get(0))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1).toString(), new OrderService().getTIByMonth(dates.get(1))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2).toString(), new OrderService().getTIByMonth(dates.get(2))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3).toString(), new OrderService().getTIByMonth(dates.get(3))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4).toString(), new OrderService().getTIByMonth(dates.get(4))));
 
         dashboard_ICChart.getData().add(chart);
     }
 
     public void dashboardICChartByYear() {
-        Date date = new Date();
-        long currentDate = date.getTime();
-        ArrayList<Long> sqlDates = new ArrayList<>();
-        ArrayList<String> dates = new ArrayList<>();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = dateFormat.format(currentDate);
-
-        dates.add(formattedDate);
-        sqlDates.add(currentDate);
-
-
-        // Lấy ra 5 năm gần nhất
-        for (int i = 0; i < 4; i++) {
-            long oneYearInMillis = 24 * 60 * 60 * 1000 * 30 * 12; // 1 năm tính bằng milliseconds
-            Date recentYear = new Date(date.getTime() - (i + 1) * oneYearInMillis);
-            sqlDates.add(recentYear.getTime());
-
-            String formattedRecentYear = dateFormat.format(recentYear);
-            dates.add(formattedRecentYear);
-        }
-
+        ArrayList<java.sql.Date> dates = new OrderService().setICChartByYear();
 
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.get(0), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(0)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(1), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(1)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(2), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(2)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(3), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(3)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(4), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(4)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0).toString(), new OrderService().getTIByYear(dates.get(0))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1).toString(), new OrderService().getTIByYear(dates.get(1))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2).toString(), new OrderService().getTIByYear(dates.get(2))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3).toString(), new OrderService().getTIByYear(dates.get(3))));
 
         dashboard_ICChart.getData().add(chart);
     }

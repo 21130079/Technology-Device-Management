@@ -27,6 +27,7 @@ public class DAOOrder {
         }
 
     }
+
     public void update(Order order) {
         try {
             PreparedStatement stm = connection.prepareStatement("UPDATE Orders SET invoiceDate = ? WHERE idOrder = ?");
@@ -37,6 +38,7 @@ public class DAOOrder {
             throw new RuntimeException(e);
         }
     }
+
     public void delete(String orderId) {
         try {
             PreparedStatement stm = connection.prepareStatement("DELETE FROM OrderDevices WHERE idOrder = ?");
@@ -176,7 +178,6 @@ public class DAOOrder {
     }
 
     public void setNOCChartByDate(XYChart.Series chart) {
-        double ti = 0;
         try {
             PreparedStatement stm = connection.prepareStatement("select invoiceDate, count(idOrder) from orders group by invoiceDate order by timestamp(invoiceDate) desc limit 5");
             ResultSet resultSet = stm.executeQuery();
@@ -189,7 +190,6 @@ public class DAOOrder {
     }
 
     public void setNOCChartByMonth(XYChart.Series chart) {
-        double ti = 0;
         try {
             PreparedStatement stm = connection.prepareStatement("select invoiceDate, count(idOrder) from orders group by MONTH(invoiceDate) order by MONTH(invoiceDate) desc limit 5");
             ResultSet resultSet = stm.executeQuery();
@@ -202,7 +202,6 @@ public class DAOOrder {
     }
 
     public void setNOCChartByYear(XYChart.Series chart) {
-        double ti = 0;
         try {
             PreparedStatement stm = connection.prepareStatement("select invoiceDate, count(idOrder) from orders group by YEAR(invoiceDate) order by YEAR(invoiceDate) desc limit 5");
             ResultSet resultSet = stm.executeQuery();
@@ -212,5 +211,50 @@ public class DAOOrder {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ArrayList<Date> setICChartByDate() {
+        ArrayList<Date> dates = new ArrayList<Date>();
+        try {
+            PreparedStatement stm = connection.prepareStatement("select invoiceDate from orders group by invoiceDate order by timestamp(invoiceDate) desc limit 5");
+            ResultSet resultSet = stm.executeQuery();
+            while (resultSet.next()) {
+                dates.add(resultSet.getDate("invoiceDate"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dates;
+    }
+
+    public ArrayList<Date> setICChartByMonth() {
+        ArrayList<Date> dates = new ArrayList<Date>();
+        try {
+            PreparedStatement stm = connection.prepareStatement("select invoiceDate from orders group by MONTH(invoiceDate) order by timestamp(invoiceDate) desc limit 5");
+            ResultSet resultSet = stm.executeQuery();
+            while (resultSet.next()) {
+                dates.add(resultSet.getDate("invoiceDate"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dates;
+    }
+
+    public ArrayList<Date> setICChartByYear() {
+        ArrayList<Date> dates = new ArrayList<Date>();
+        try {
+            PreparedStatement stm = connection.prepareStatement("select invoiceDate from orders group by YEAR(invoiceDate) order by timestamp(invoiceDate) desc limit 5");
+            ResultSet resultSet = stm.executeQuery();
+            while (resultSet.next()) {
+                dates.add(resultSet.getDate("invoiceDate"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dates;
     }
 }
