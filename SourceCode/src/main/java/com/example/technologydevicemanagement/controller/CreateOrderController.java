@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.view.SaleManagementApp;
+import com.example.technologydevicemanagement.App;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
@@ -23,9 +23,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import service.DeviceService;
-import service.OrderDevicesService;
-import service.OrderService;
+import com.example.technologydevicemanagement.service.DeviceService;
+import com.example.technologydevicemanagement.service.OrderDevicesService;
+import com.example.technologydevicemanagement.service.OrderService;
 
 
 import java.io.IOException;
@@ -255,6 +255,8 @@ public class CreateOrderController {
             // Tạo một Scene mới
             Scene scene = new Scene(root, 1200, 700);
             Stage stage = new Stage();
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+            stage.getIcons().add(icon);
             stage.setTitle("Technology Equipment Sales Management System");
             // Đặt scene cho stage
             stage.setScene(scene);

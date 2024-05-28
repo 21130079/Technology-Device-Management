@@ -1,7 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.view.CreateOrderApp;
-import com.example.technologydevicemanagement.view.LoginApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
 
@@ -22,7 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import service.OrderService;
+import com.example.technologydevicemanagement.service.OrderService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -121,9 +120,11 @@ public class DashboardController implements Initializable {
 
             if (option.get().equals(ButtonType.OK)) {
                 logout.getScene().getWindow().hide();
-                FXMLLoader loader = new FXMLLoader(App.class.getResource("view/login.fxml"));
-                Parent root = loader.load();
+                Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/login.fxml"));
+                Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
                 Stage stage = new Stage();
+                stage.setTitle("Technology Equipment Sales Management System");
+                stage.getIcons().add(icon);
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
@@ -335,7 +336,7 @@ public class DashboardController implements Initializable {
                 stage.setTitle("Create Order");
                 // Đặt scene cho stage
                 stage.setScene(scene);
-
+                Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
             stage.setTitle("Technology Equipment Sales Management System");
             stage.getIcons().add(icon);
             stage.setScene(scene);
@@ -373,8 +374,8 @@ public class DashboardController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
-        stage.hide();
+//        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
+//        stage.hide();
 
     }
 
