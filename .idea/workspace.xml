@@ -4,17 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49210d54-cb61-4255-832c-d90a7a8c6d5c" name="Changes" comment="" />
+    <list default="true" id="49210d54-cb61-4255-832c-d90a7a8c6d5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/AccountManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/AccountManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/CreateOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/CreateOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/ImportProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/ImportProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/UpdateOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/com/example/technologydevicemanagement/controller/UpdateOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/database/DAODevice.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/database/DAODevice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SourceCode/src/main/java/database/DAOOrderDevices.java" beforeDir="false" afterPath="$PROJECT_DIR$/SourceCode/src/main/java/database/DAOOrderDevices.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Pledat02&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/21130079/Technology-Device-Management&quot;,
+    &quot;accountId&quot;: &quot;34962641-ec9a-4dad-a635-57c6e9f2927e&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="jdkForImporter" value="21" />
+        <option name="workspaceImportForciblyTurnedOn" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -28,29 +74,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/NMCNPM/Exercise/Technology-Device-Management/SourceCode",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.com.example.technologydevicemanagement.App.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Maven.App.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.Technology-Device-Management [install...].executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PhamLeDat&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MSI DAT/CNPM/Technology-Device-Management/SourceCode/pom.xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.runner&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\NMCNPM\Exercise\Technology-Device-Management\src\main\resources\img" />
@@ -58,7 +109,7 @@
   </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.example.technologydevicemanagement.LoginApp" />
+      <option name="MAIN_CLASS_NAME" value="com.example.technologydevicemanagement.App" />
       <module name="Technology-Device-Management" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -68,14 +119,15 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-4f524021" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e6d634b6-0a99-4573-a701-3c4bbce12226" name="Changes" comment="" />
+      <changelist id="49210d54-cb61-4255-832c-d90a7a8c6d5c" name="Changes" comment="" />
       <created>1716711623698</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -85,6 +137,9 @@
       <workItem from="1716732207851" duration="1286000" />
       <workItem from="1716777544685" duration="909000" />
       <workItem from="1716784840059" duration="270000" />
+      <workItem from="1716893307955" duration="253000" />
+      <workItem from="1716893579799" duration="583000" />
+      <workItem from="1716898228694" duration="3664000" />
     </task>
     <servers />
   </component>

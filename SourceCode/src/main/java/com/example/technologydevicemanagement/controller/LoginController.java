@@ -2,7 +2,7 @@ package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Account;
-import database.DAOAccount;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import service.AccountService;
 
 import java.io.IOException;
 
@@ -43,11 +44,11 @@ public class LoginController {
             error_lb.setText("Please enter Password");
             return;
         }
-        if(!new DAOAccount().checkExits(username,passwd)){
+        if(!new AccountService().isExistAccount(username,passwd)){
             error_lb.setText("username or password is wrong !");
             return;
         }
-        Account loginAccount = new DAOAccount().getByUsername(username);
+        Account loginAccount = new AccountService().getDataById(username);
         Data.username = username;
         Data.role = loginAccount.getRoles().getFirst();
 
