@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.view.SaleManagementApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Device;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import service.DeviceService;
+import com.example.technologydevicemanagement.service.DeviceService;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -274,6 +274,8 @@ public class ImportProductController {
             Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/dashboard.fxml"));
             Scene scene = new Scene(root, 1200, 700);
             Stage stage = new Stage();
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+            stage.getIcons().add(icon);
             stage.setTitle("Technology Equipment Sales Management System");
             stage.setScene(scene);
             stage.show();

@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.view.CreateOrderApp;
+import com.example.technologydevicemanagement.App;
 
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
@@ -18,8 +18,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-import service.OrderDevicesService;
-import service.OrderService;
+import com.example.technologydevicemanagement.service.OrderDevicesService;
+import com.example.technologydevicemanagement.service.OrderService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -124,12 +124,7 @@ public class UpdateOrderController {
 
     @FXML
     public void close() {
-        orderid.getScene().getWindow().hide();
-        try {
-            showDashBoardView();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ((Stage) orderid.getScene().getWindow()).close();
     }
 
     @FXML
@@ -150,7 +145,7 @@ public class UpdateOrderController {
             new OrderDevicesService().updateDevicesInOrder(productList, id);
 
             close();
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Update Order");
                 alert.setHeaderText(null);
                 alert.setContentText("Your order has been updated");
@@ -167,9 +162,9 @@ public class UpdateOrderController {
         Stage stage = (Stage) orderid.getScene().getWindow();
 
         Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
-
-        stage.setTitle("Technology Equipment Sales Management System");
         stage.getIcons().add(icon);
+        stage.setTitle("Technology Equipment Sales Management System");
+
         // Set giao diện mới
         stage.setScene(scene);
         stage.setTitle("Technology Equipment Sales Management System");

@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.view.LoginApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Account;
 
 import javafx.event.EventHandler;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import service.AccountService;
+import com.example.technologydevicemanagement.service.AccountService;
 
 import java.io.IOException;
 
@@ -85,6 +85,8 @@ public class LoginController {
                 // Tạo một Scene mới
                 Scene scene = new Scene(root, 1200, 700);
                 Stage stage = new Stage();
+                Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+                stage.getIcons().add(icon);
                 stage.setTitle("Technology Equipment Sales Management System");
                 // Đặt scene cho stage
                 stage.setScene(scene);

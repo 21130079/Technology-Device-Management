@@ -1,6 +1,6 @@
 package com.example.technologydevicemanagement.controller;
 
-import com.example.technologydevicemanagement.view.SaleManagementApp;
+import com.example.technologydevicemanagement.App;
 import com.example.technologydevicemanagement.model.Account;
 
 import javafx.collections.FXCollections;
@@ -14,7 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import service.AccountService;
+import com.example.technologydevicemanagement.service.AccountService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -193,6 +193,8 @@ public class AccountManagementController {
             // Tạo một Scene mới
             Scene scene = new Scene(root, 1200, 700);
             Stage stage = new Stage();
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+            stage.getIcons().add(icon);
             stage.setTitle("Technology Equipment Sales Management System");
             // Đặt scene cho stage
             stage.setScene(scene);
