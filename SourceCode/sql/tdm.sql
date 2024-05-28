@@ -13,10 +13,11 @@
 
  Date: 28/05/2024 23:24:04
 */
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
+create database tdm;
+use tdm;
 -- ----------------------------
 -- Table structure for accounts
 -- ----------------------------
