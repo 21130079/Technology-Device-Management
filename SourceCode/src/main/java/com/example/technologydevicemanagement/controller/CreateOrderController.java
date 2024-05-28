@@ -1,14 +1,12 @@
 package com.example.technologydevicemanagement.controller;
 
-
-
 import com.example.technologydevicemanagement.view.SaleManagementApp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import com.example.technologydevicemanagement.model.Device;
-import database.DAODevice;
-import database.DAOOrder;
-import database.DAOOrderDevices;
+
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +23,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import service.DeviceService;
+import service.OrderDevicesService;
+import service.OrderService;
 
 
 import java.io.IOException;
@@ -169,7 +170,7 @@ public class CreateOrderController {
         });
 
         ObservableList<Device> products = FXCollections.observableArrayList();
-        products.addAll(new DAODevice().getAll());
+        products.addAll(new DeviceService().getAllData());
         stocktable.setItems(products);
 
         searchHandle();
@@ -223,14 +224,14 @@ public class CreateOrderController {
         });
     }
     public void payment() {
-        String id = new DAOOrder().insert();
+        String id = new OrderService().addOrder();
         System.out.println(id);
-        DAOOrderDevices daoOrderDevices = new DAOOrderDevices();
-        DAODevice daoDevice = new DAODevice();
+        OrderDevicesService OrderDevicesService = new OrderDevicesService();
+        DeviceService DeviceService = new DeviceService();
         for (Device device : billDevices) {
             for (int i = 0; i < device.getQuantity(); i++) {
-                daoOrderDevices.insert(device, id);
-                daoDevice.updateQuantity(device, device.getQuantityInStock());
+                OrderDevicesService.addDeviceToOrder(device, id);
+                DeviceService.updateQuantity(device, device.getQuantityInStock());
             }
         }
         billDevices.clear();
@@ -348,7 +349,7 @@ public class CreateOrderController {
 
         @Override
         public void commitEdit(Integer newValue) {
-            int intialQuantityInStock = new DAODevice().getById(getTableRow().getItem().getIdDevice()).getQuantityInStock();
+            int intialQuantityInStock = new DeviceService().getDataById(getTableRow().getItem().getIdDevice()).getQuantityInStock();
             super.commitEdit(newValue);
             textField.setText(newValue + "");
             getTableRow().getItem().setQuantity(newValue);
@@ -376,7 +377,7 @@ public class CreateOrderController {
     private void searchHandle() {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             ObservableList<Device> filteredList = FXCollections.observableArrayList();
-            filteredList.addAll(new DAODevice().getAll());
+            filteredList.addAll(new DeviceService().getAllData());
             if (newValue.isEmpty() || newValue.isBlank()) {
                 stocktable.setItems(filteredList);
                 return;
@@ -384,7 +385,7 @@ public class CreateOrderController {
 
             String keyword = newValue.toLowerCase();
             filteredList.clear();
-            for (Device device : new DAODevice().getAll()) {
+            for (Device device : new DeviceService().getAllData()) {
                 if (device.getIdDevice().toLowerCase().contains(keyword)) {
                     filteredList.add(device);
                 }

@@ -9,11 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.Map;
 
 public class DAODevice {
     Connection connection = DBUtil.getConnection();
 
-    public void insert(Device device) {
+    public int insert(Device device) {
         try {
             PreparedStatement stm = connection.prepareStatement("insert into devices(idDevice,nameDevice,category,price,brand,manufacturingDate,weight,urlImg,quantityInStock) values(?,?,?,?,?,?,?,?,?)");
             stm.setString(1, device.getIdDevice());
@@ -26,9 +27,12 @@ public class DAODevice {
             stm.setString(8, device.getUrlImg());
             stm.setInt(9, device.getQuantityInStock());
             stm.executeUpdate();
+            return 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
+
     }
 
     public ArrayList<Device> getAll() {
@@ -117,4 +121,6 @@ public class DAODevice {
             throw new RuntimeException(e);
         }
     }
+
+
 }

@@ -2,7 +2,7 @@ package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.view.SaleManagementApp;
 import com.example.technologydevicemanagement.model.Account;
-import database.DAOAccount;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,8 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import service.AccountService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class AccountManagementController {
 
     private ArrayList<String> selectedRoles = new ArrayList<>();
 
-    private DAOAccount daoAccount = new DAOAccount();
+    private AccountService accountService = new AccountService();
 
     private ObservableList<Account> accounts = FXCollections.observableArrayList();
 
@@ -82,9 +84,9 @@ public class AccountManagementController {
 
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK){
-                            daoAccount.delete(account.getUsername());
+                            accountService.deleteData(account.getUsername());
                             ObservableList<Account> accounts = FXCollections.observableArrayList();
-                            accounts.addAll(daoAccount.getAll());
+                            accounts.addAll(accountService.getAllData());
                             stocktable.setItems(accounts);
                         } else {
                             // User chose CANCEL or closed the dialog
@@ -99,7 +101,7 @@ public class AccountManagementController {
             }
         });
 
-        accounts.addAll(daoAccount.getAll());
+        accounts.addAll(accountService.getAllData());
         stocktable.setItems(accounts);
         searchHandle();
 
@@ -117,7 +119,7 @@ public class AccountManagementController {
 
     @FXML
     private void createAccount() {
-        DAOAccount daoAccount =   new DAOAccount();
+
         String username= usernameField.getText();
         String passwd = passwordField.getText();
         if(username.trim().equals((""))){
@@ -132,32 +134,32 @@ public class AccountManagementController {
             statusLabel.setText("Please check role");
             return;
         }
-        if(daoAccount.checkExitsUsername(username)){
+        if(accountService.isExistUsername(username)){
             statusLabel.setText("username is exist");
             return;
         }
 
-        daoAccount.insert(new Account(username,passwd,selectedRoles));
+        accountService.saveData(new Account(username,passwd,selectedRoles));
         usernameField.clear();
         passwordField.clear();
         accounts.clear();
-        accounts.addAll(daoAccount.getAll());
+        accounts.addAll(accountService.getAllData());
         stocktable.setItems(accounts);
         statusLabel.setText("Create account successfully");
     }
     public void updateAccount() {
-        Account account = daoAccount.getByUsername(usernameField.getText());
+        Account account = accountService.getDataById(usernameField.getText());
         System.out.println(account.getRoles());
         if (account != null) {
             account.setPasswd(passwordField.getText());
             account.setRoles(selectedRoles);
             System.out.println(account.getRoles());
-            daoAccount.update(account);
+            accountService.updateData(account);
             usernameField.clear();
             passwordField.clear();
             statusLabel.setText("Update account successfully");
             accounts.clear();
-            accounts.addAll(daoAccount.getAll());
+            accounts.addAll(accountService.getAllData());
             stocktable.setItems(accounts);
         } else{
             statusLabel.setText("Account not found");
@@ -168,7 +170,7 @@ public class AccountManagementController {
     private void searchHandle() {
         usernameField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-            accounts.addAll(new DAOAccount().getAll());
+            accounts.addAll(new AccountService().getAllData());
             if (newValue.isEmpty() || newValue.isBlank()) {
                 stocktable.setItems(accounts);
                 return;
@@ -176,7 +178,7 @@ public class AccountManagementController {
 
             String keyword = newValue.toLowerCase();
             accounts.clear();
-            for (Account account : new DAOAccount().getAll()) {
+            for (Account account : new AccountService().getAllData()) {
                 if (account.getUsername().contains(keyword)) {
                     accounts.add(account);
                 }

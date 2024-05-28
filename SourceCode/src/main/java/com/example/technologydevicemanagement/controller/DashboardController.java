@@ -4,12 +4,13 @@ import com.example.technologydevicemanagement.view.CreateOrderApp;
 import com.example.technologydevicemanagement.view.LoginApp;
 import com.example.technologydevicemanagement.model.Device;
 import com.example.technologydevicemanagement.model.Order;
-import database.DAOOrder;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
@@ -17,9 +18,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import service.OrderService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -118,7 +121,7 @@ public class DashboardController implements Initializable {
 
             if (option.get().equals(ButtonType.OK)) {
                 logout.getScene().getWindow().hide();
-                FXMLLoader loader = new FXMLLoader(LoginApp.class.getResource("view/login.fxml"));
+                FXMLLoader loader = new FXMLLoader(App.class.getResource("view/login.fxml"));
                 Parent root = loader.load();
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
@@ -131,39 +134,39 @@ public class DashboardController implements Initializable {
     }
 
     public void dashboardNC() {
-        int nc = new DAOOrder().getAll().size();
+        int nc = new OrderService().getAllData().size();
         dashboard_NC.setText(String.valueOf(nc));
     }
 
     public void dashboardTIByDate() {
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        double ti = new DAOOrder().getTIByDate(sqlDate);
+        double ti = new OrderService().getTIByDate(sqlDate);
         dashboard_TI.setText("$" + String.valueOf(ti));
     }
 
     public void dashboardTIByMonth() {
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        double ti = new DAOOrder().getTIByMonth(sqlDate);
+        double ti = new OrderService().getTIByMonth(sqlDate);
         dashboard_TI.setText("$" + String.valueOf(ti));
     }
 
     public void dashboardTIByYear() {
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        double ti = new DAOOrder().getTIByYear(sqlDate);
+        double ti = new OrderService().getTIByYear(sqlDate);
         dashboard_TI.setText("$" + String.valueOf(ti));
     }
 
     public void dashboardTI() {
-        dashboard_TIncome.setText("$" + String.valueOf(new DAOOrder().getTI()));
+        dashboard_TIncome.setText("$" + String.valueOf(new OrderService().getTI()));
     }
 
     public void dashboardNOCChartByDate() {
         dashboard_NOCChart.getData().clear();
         XYChart.Series chart = new XYChart.Series<>();
-        new DAOOrder().setNOCChartByDate(chart);
+        new OrderService().setNOCChartByDate(chart);
         dashboard_NOCChart.getData().add(chart);
         dashboard_NOCChart.setLegendVisible(false);
     }
@@ -171,7 +174,7 @@ public class DashboardController implements Initializable {
     public void dashboardNOCChartByMonth() {
         dashboard_NOCChart.getData().clear();
         XYChart.Series chart = new XYChart.Series<>();
-        new DAOOrder().setNOCChartByMonth(chart);
+        new OrderService().setNOCChartByMonth(chart);
         dashboard_NOCChart.getData().add(chart);
         dashboard_NOCChart.setLegendVisible(false);
     }
@@ -179,7 +182,7 @@ public class DashboardController implements Initializable {
     public void dashboardNOCChartByYear() {
         dashboard_NOCChart.getData().clear();
         XYChart.Series chart = new XYChart.Series<>();
-        new DAOOrder().setNOCChartByYear(chart);
+        new OrderService().setNOCChartByYear(chart);
         dashboard_NOCChart.getData().add(chart);
         dashboard_NOCChart.setLegendVisible(false);
     }
@@ -197,7 +200,6 @@ public class DashboardController implements Initializable {
         sqlDates.add(currentDate);
 
 
-
         // Lấy ra 5 ngày gần nhất
         for (int i = 0; i < 4; i++) {
             long oneDayInMillis = 24 * 60 * 60 * 1000; // 1 ngày tính bằng milliseconds
@@ -212,11 +214,11 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(0)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(2)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(3)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(4), new DAOOrder().getTIByDate(new java.sql.Date(sqlDates.get(4)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(0)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(1)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(2)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(3)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4), new OrderService().getTIByDate(new java.sql.Date(sqlDates.get(4)))));
 
         dashboard_ICChart.getData().add(chart);
     }
@@ -234,7 +236,6 @@ public class DashboardController implements Initializable {
         sqlDates.add(currentDate);
 
 
-
         // Lấy ra 5 tháng gần nhất
         for (int i = 0; i < 4; i++) {
             long oneMonthInMillis = 24 * 60 * 60 * 1000 * 30; // 1 tháng tính bằng milliseconds
@@ -249,11 +250,11 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(0)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(1)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(2)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(3)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(4), new DAOOrder().getTIByMonth(new java.sql.Date(sqlDates.get(4)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(0)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(1)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(2)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(3)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4), new OrderService().getTIByMonth(new java.sql.Date(sqlDates.get(4)))));
 
         dashboard_ICChart.getData().add(chart);
     }
@@ -271,7 +272,6 @@ public class DashboardController implements Initializable {
         sqlDates.add(currentDate);
 
 
-
         // Lấy ra 5 năm gần nhất
         for (int i = 0; i < 4; i++) {
             long oneYearInMillis = 24 * 60 * 60 * 1000 * 30 * 12; // 1 năm tính bằng milliseconds
@@ -286,24 +286,24 @@ public class DashboardController implements Initializable {
         dashboard_ICChart.getData().clear();
         dashboard_ICChart.setLegendVisible(false);
         XYChart.Series chart = new XYChart.Series<>();
-        chart.getData().add(new XYChart.Data<>(dates.get(0), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(0)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(1), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(1)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(2), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(2)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(3), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(3)))));
-        chart.getData().add(new XYChart.Data<>(dates.get(4), new DAOOrder().getTIByYear(new java.sql.Date(sqlDates.get(4)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(0), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(0)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(1), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(1)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(2), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(2)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(3), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(3)))));
+        chart.getData().add(new XYChart.Data<>(dates.get(4), new OrderService().getTIByYear(new java.sql.Date(sqlDates.get(4)))));
 
         dashboard_ICChart.getData().add(chart);
     }
 
-    public void handleRole(){
-        if(Data.role.equals("Sale staff")){
+    public void handleRole() {
+        if (Data.role.equals("Sale staff")) {
             accountBtn.setVisible(false);
             importBtn.setVisible(false);
             month_btn.setVisible(false);
             year_btn.setVisible(false);
             date_btn.setVisible(false);
 
-        }else if(Data.role.equals("Warehouse staff")){
+        } else if (Data.role.equals("Warehouse staff")) {
             createOrderBtn.setVisible(false);
             historyOrderBtn.setVisible(false);
             month_btn.setVisible(false);
@@ -326,7 +326,6 @@ public class DashboardController implements Initializable {
     }
 
     public void openCreateOrder() {
-
             try {
                 // Tạo một FXMLLoader mới để tải lại cùng một fxml file
                 Parent root = FXMLLoader.load(getClass().getResource("/com/example/technologydevicemanagement/view/create-order.fxml"));
@@ -337,15 +336,20 @@ public class DashboardController implements Initializable {
                 // Đặt scene cho stage
                 stage.setScene(scene);
 
-                // Hiển thị stage
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
+            stage.setScene(scene);
+
+            // Hiển thị stage
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Stage stage = (Stage) dashboard_TI.getScene().getWindow();
         stage.hide();
     }
+
     public void openUpdateOrder() {
 
         try {
@@ -356,6 +360,10 @@ public class DashboardController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Update Order");
             // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
             stage.setScene(scene);
 
             // Hiển thị stage
@@ -369,8 +377,6 @@ public class DashboardController implements Initializable {
         stage.hide();
 
     }
-
-
 
 
     @FXML
@@ -381,11 +387,13 @@ public class DashboardController implements Initializable {
         // Show history orders
         historyOrders.setVisible(true);
     }
+
     @FXML
-    private void showDashboard(){
+    private void showDashboard() {
         dashboard_form.setVisible(true);
         historyOrders.setVisible(false);
     }
+
     @FXML
     private void openAccountManagement() {
         try {
@@ -396,6 +404,10 @@ public class DashboardController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Account Management");
             // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
             stage.setScene(scene);
 
             // Hiển thị stage
@@ -408,6 +420,7 @@ public class DashboardController implements Initializable {
         Stage stage = (Stage) dashboard_TI.getScene().getWindow();
         stage.hide();
     }
+
     @FXML
     private void openImportProduct() {
         try {
@@ -418,6 +431,10 @@ public class DashboardController implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Import Product");
             // Đặt scene cho stage
+            Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+            stage.setTitle("Technology Equipment Sales Management System");
+            stage.getIcons().add(icon);
             stage.setScene(scene);
 
             // Hiển thị stage
@@ -446,48 +463,37 @@ public class DashboardController implements Initializable {
         productListColumn.setCellValueFactory(cellData -> cellData.getValue().productListProperty());
         paymentDateColumn.setCellValueFactory(cellData -> cellData.getValue().invoiceDateProperty());
         amountColumn.setCellValueFactory(cellData -> cellData.getValue().amountProperty().asObject());
-//        Image upimg = new Image(DashboardController.class.getResourceAsStream("../resources/img/edit.png"));
-//        ImageView iconUpdate = new ImageView(upimg);
-//        iconUpdate.setFitWidth(16);
-//        iconUpdate.setFitHeight(16);
-//        ImageView iconDelete = new ImageView(new Image(getClass().getResourceAsStream("../resources/img/edit.png")));
-//        iconDelete.setFitWidth(16);
-//        iconDelete.setFitHeight(16);
 
 
         featuresColumn.setCellFactory(param -> new TableCell<Order, Order>() {
-
             final Button btnUpdate = new Button("Update");
-
             final Button btnDelete = new Button("Delete");
             final HBox buttonsBox = new HBox(btnUpdate, btnDelete);
 
-//                btnUpdate.setGraphic(iconUpdate);
-//                btnDelete.setGraphic(iconDelete);
-                {
-                    // Thiết lập hành động cho nút Update
-                    btnUpdate.setOnAction(event -> {
-                        Order order = getTableView().getItems().get(getIndex());
-                        updateOrder(order);
-                    });
+            {
+                // Thiết lập hành động cho nút Update
+                btnUpdate.setOnAction(event -> {
+                    Order order = getTableView().getItems().get(getIndex());
+                    updateOrder(order);
+                });
 
-                    // Thiết lập hành động cho nút Delete
-                    btnDelete.setOnAction(event -> {
-                        Order order = getTableView().getItems().get(getIndex());
+                // Thiết lập hành động cho nút Delete
+                btnDelete.setOnAction(event -> {
+                    Order order = getTableView().getItems().get(getIndex());
 
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Confirm Delete");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Are you sure you want to delete order?");
-                        Optional<ButtonType> option = alert.showAndWait();
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirm Delete");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Are you sure you want to delete order?");
+                    Optional<ButtonType> option = alert.showAndWait();
 
-                        if (option.get().equals(ButtonType.OK)) {
-                            deleteOrder(order);
-                        }
-                    });
-                    buttonsBox.setStyle("-fx-alignment: CENTER;");
+                    if (option.get().equals(ButtonType.OK)) {
+                        deleteOrder(order);
+                    }
+                });
 
-                }
+                buttonsBox.setAlignment(Pos.CENTER);
+            }
 
 
             @Override
@@ -513,7 +519,7 @@ public class DashboardController implements Initializable {
             private void deleteOrder(Order order) {
                 // Thêm logic để xóa đơn hàng
                 System.out.println("Delete order: " + order);
-                new DAOOrder().delete(order.getIdOrder());
+                new OrderService().deleteData(order.getIdOrder());
                 getdata();
                 refreshTable();
                 // Bạn có thể xóa đơn hàng khỏi dữ liệu hoặc thực hiện hành động tương ứng
@@ -524,22 +530,26 @@ public class DashboardController implements Initializable {
     }
 
 
-
     @FXML
     private void getdata() {
         ObservableList<Order> orders = FXCollections.observableArrayList();
-        orders.addAll(new DAOOrder().getAll());
+        orders.addAll(new OrderService().getAllData());
         historyOrderTable.setItems(orders);
     }
 
     public void showCreateOrderView(javafx.event.ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(CreateOrderApp.class.getResource("view/create-order.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("view/create-order.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
         // Lấy Stage hiện tại từ button
         Stage stage = new Stage();
+
+        Image icon = new Image(App.class.getResourceAsStream("/img/logo.png"));
+
+        stage.setTitle("Technology Equipment Sales Management System");
+        stage.getIcons().add(icon);
         // Set giao diện mới
         stage.setScene(scene);
         stage.show();

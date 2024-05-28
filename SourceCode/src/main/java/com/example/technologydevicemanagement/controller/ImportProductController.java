@@ -2,7 +2,6 @@ package com.example.technologydevicemanagement.controller;
 
 import com.example.technologydevicemanagement.view.SaleManagementApp;
 import com.example.technologydevicemanagement.model.Device;
-import database.DAODevice;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -17,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import service.DeviceService;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -59,7 +59,7 @@ public class ImportProductController {
     @FXML
     private ImageView imageView;
     TextField inputImg = new TextField();
-    private DAODevice daoDevice = new DAODevice();
+    private DeviceService deviceService = new DeviceService();
     private HashMap<String, Image> imageCache = new HashMap<>();
     private Path imagePath;
 
@@ -129,19 +129,19 @@ public class ImportProductController {
     }
 
     private void refreshTable() {
-        ObservableList<Device> products = FXCollections.observableArrayList(daoDevice.getAll());
+        ObservableList<Device> products = FXCollections.observableArrayList(deviceService.getAllData());
         stocktable.setItems(products);
     }
 
     private void filterDevices(String keyword) {
-        ObservableList<Device> filteredList = FXCollections.observableArrayList(daoDevice.getAll());
+        ObservableList<Device> filteredList = FXCollections.observableArrayList(deviceService.getAllData());
         if (keyword.isEmpty() || keyword.isBlank()) {
             stocktable.setItems(filteredList);
             return;
         }
         filteredList.clear();
         keyword = keyword.toLowerCase();
-        for (Device device : daoDevice.getAll()) {
+        for (Device device : deviceService.getAllData()) {
             if (device.getIdDevice().toLowerCase().contains(keyword)) {
                 filteredList.add(device);
             }
@@ -191,15 +191,15 @@ public class ImportProductController {
             String img = inputImg.getText();
             int quantity = Integer.parseInt(inputQuantity.getText());
 
-            Device device = daoDevice.getById(id);
+            Device device = deviceService.getDataById(id);
 
             if (device == null) {
                 device = new Device(name, category, price, brand, manufacturingDate, weight, img, quantity);
-                daoDevice.insert(device);
+                deviceService.saveData(device);
                 showInforrAlert(null,"The device imported successfully");
             } else {
                 Device updateDevice = new Device(id, name, category, price, brand, manufacturingDate, weight, img, quantity);
-                daoDevice.update(updateDevice);
+                deviceService.updateData(updateDevice);
                 showInforrAlert(null,"The device updated successfully");
             }
 
