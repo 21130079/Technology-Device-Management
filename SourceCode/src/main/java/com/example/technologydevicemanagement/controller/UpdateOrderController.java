@@ -143,7 +143,10 @@ public class UpdateOrderController {
             ArrayList<Device> devices = new ArrayList<>();
             devices.addAll(products);
             new OrderDevicesService().updateDevicesInOrder(productList, id);
-
+            ObservableList<Order> orders = FXCollections.observableArrayList();
+            orders.addAll(new OrderService().getAllData());
+            Data.getInstance().getHistoryTable().setItems(orders);
+            Data.getInstance().getHistoryTable().refresh();
             close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Update Order");

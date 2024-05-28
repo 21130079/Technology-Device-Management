@@ -366,7 +366,7 @@ public class DashboardController implements Initializable {
             stage.setTitle("Technology Equipment Sales Management System");
             stage.getIcons().add(icon);
             stage.setScene(scene);
-
+            Data.getInstance().setHistoryTable(historyOrderTable);
             // Hiển thị stage
             stage.show();
 
