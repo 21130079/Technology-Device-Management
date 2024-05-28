@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static com.example.technologydevicemanagement.controller.DashboardController.getDashboard;
+
 public class AccountManagementController {
     @FXML
     private TableView<Account> stocktable;
@@ -206,7 +208,8 @@ public class AccountManagementController {
         }
     }
     public void backToDashboard() {
-        restartApplication();
+//        restartApplication();
+        getDashboard();
         Stage stage = (Stage) statusLabel.getScene().getWindow();
         stage.close();
     }

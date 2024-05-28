@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class DashboardController implements Initializable {
-
+    private static Stage dashboardStage;
     private Order orderUpdate;
     @FXML
     TableView historyOrderTable;
@@ -445,8 +445,11 @@ public class DashboardController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
-        stage.hide();
+
+        dashboardStage = (Stage) dashboard_TI.getScene().getWindow();
+        dashboardStage.hide();
+//        Stage stage = (Stage) dashboard_TI.getScene().getWindow();
+//        stage.hide();
     }
 
     public void data() {
@@ -580,5 +583,11 @@ public class DashboardController implements Initializable {
 
     public Order getOrderUpdate() {
         return orderUpdate;
+    }
+
+    public static void getDashboard() {
+        if (dashboardStage != null) {
+            dashboardStage.show();
+        }
     }
 }
