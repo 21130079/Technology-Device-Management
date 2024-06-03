@@ -521,9 +521,4 @@ public class DashboardController implements Initializable {
         return orderUpdate;
     }
 
-    public static void getDashboard() {
-        if (dashboardStage != null) {
-            dashboardStage.show();
-        }
-    }
 }
