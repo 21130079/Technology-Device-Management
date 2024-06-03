@@ -29,8 +29,6 @@ import java.nio.file.Paths;
 import java.time.ZoneId;
 import java.util.HashMap;
 
-import static com.example.technologydevicemanagement.controller.DashboardController.getDashboard;
-
 public class ImportProductController {
     @FXML
     private TableView<Device> stocktable;
@@ -227,8 +225,7 @@ public class ImportProductController {
     }
 
     public void backToDashboard() {
-//        restartApplication();
-        getDashboard();
+        restartApplication();
         Stage stage = (Stage) stocktable.getScene().getWindow();
         stage.close();
     }
